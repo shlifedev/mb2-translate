@@ -16,8 +16,7 @@ namespace Patcher
                 return @"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\";
             }
         }
-        public static string MB_SANDBOX_PATH
-
+        public static string MB_SANDBOX_PATH 
         {
             get
             {
