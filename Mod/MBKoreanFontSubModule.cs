@@ -141,7 +141,8 @@ namespace MBKoreanFont
 
         protected override void OnSubModuleLoad()
         {
-            base.OnSubModuleLoad(); 
+            base.OnSubModuleLoad();
+            LoadFontFromModule();
         }
     }
 }   
