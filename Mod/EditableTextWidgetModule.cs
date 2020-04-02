@@ -1,6 +1,7 @@
 ﻿
 using HarmonyLib;
 using System;
+using System.Reflection;
 using TaleWorlds.Core;
 using TaleWorlds.GauntletUI;
 
@@ -9,24 +10,28 @@ namespace MBKoreanFont
     [HarmonyPatch]
     public static class EditableTextWidgetModule
     {
-        [HarmonyPatch(typeof(EditableTextWidget), "OnMousePressed")]
+        public static System.Collections.Generic.HashSet<Object> ApplyMap = new System.Collections.Generic.HashSet<Object>();
+        [HarmonyPatch(typeof(EditableTextWidget), "OnUpdate")]
         static void Prefix(Object __instance)
         {
+         
            
             Type instType = AccessTools.TypeByName("TaleWorlds.GauntletUI.EditableTextWidget");
-            Traverse t = Traverse.Create(__instance);
-            Brush brush = t.Field("_brush").GetValue<Brush>();
-            if (brush == null)
+            Traverse t = Traverse.Create(__instance); 
+            Brush _brush = t.Field("_brush").GetValue<Brush>();
+            if (ApplyMap.Contains(__instance) == false)
             {
-                Bannersample.Log("_poachersParty NULL!"); 
-            }
-            else
-            {
-                InformationManager.DisplayMessage(new InformationMessage("Mouse Focused Editable Text."));
-                brush.Font = MBKoreanFont.MBKoreanFontSubModule.font;
-            }
-
-
+                if (_brush == null)
+                {
+                    Bannersample.Log("_poachersParty NULL!");
+                }
+                else
+                {
+                   // InformationManager.DisplayMessage(new InformationMessage("Loaded EditableTextWidgetModule."));
+                    _brush.Font = MBKoreanFont.MBKoreanFontSubModule.font;
+                    ApplyMap.Add(__instance);
+                }
+            } 
         }
     }
 }
