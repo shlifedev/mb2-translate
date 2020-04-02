@@ -49,8 +49,7 @@ namespace MBKoreanFont
                 _gameUpTime = float.NegativeInfinity;
                 
             }
-        }
-
+        } 
         public override void OnCampaignStart(Game game, object starterObject)
         {
             base.OnCampaignStart(game, starterObject);
