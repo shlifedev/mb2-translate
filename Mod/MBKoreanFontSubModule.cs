@@ -61,6 +61,7 @@ namespace MBKoreanFont
 
         public void LoadFontFromModule()
         {
+             
             //load texture
             GameTex texture = new GameTex((ITexture) new EngineTexture(EngineTex.CreateTextureFromPath($"../../Modules/{ModuleName}/Font", $"{FontName}.png")));
            
