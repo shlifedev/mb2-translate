@@ -10,7 +10,7 @@ namespace Patcher
     {
         public static readonly string[] PatcherTarget = new string[]{
 
-                "Modules/MBKoreanFontz",
+                "Modules/MBKoreanFont",
                 "Modules/Native/ModuleData/Languages/KR",
                 "GUI/GauntletUI/Fonts/Languages.xml" 
         };

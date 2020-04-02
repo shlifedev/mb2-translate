@@ -49,14 +49,14 @@ namespace MBKoreanFont
             if (_gameUpTime >= 5)
             {
                 LoadFontFromModule();
-                _gameUpTime = float.NegativeInfinity;
+                _gameUpTime = 0;
                 
             }
         } 
         public override void OnCampaignStart(Game game, object starterObject)
         {
-            base.OnCampaignStart(game, starterObject);
-          
+            base.OnCampaignStart(game, starterObject); 
+            
         }
 
         public void LoadFontFromModule()
