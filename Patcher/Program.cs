@@ -11,12 +11,12 @@ namespace Patcher
         static void StartPatch()
         {
 
-            GameFilePatcher.Patch();
+            //GameFilePatcher.Patch();
             PrefabPatcher.PrefabPatch(); 
         }
         static void Main(string[] args)
         {
-            StartPatch();
+            //StartPatch();
         }
     }
 }
