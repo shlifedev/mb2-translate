@@ -15,6 +15,7 @@ using GameTex = TaleWorlds.TwoDimension.Texture;
 using TaleWorlds.Core;
 using System;
 using System.Linq;
+using HarmonyLib;
 
 namespace MBKoreanFont
 {
@@ -23,6 +24,8 @@ namespace MBKoreanFont
     /// </summary>
     public class MBKoreanFontSubModule : MBSubModuleBase
     {
+        private static Harmony harmony = new Harmony("de.schplorg.bannerfix");
+
         /// <summary>
         /// Your Font File Name. (xxx.png, xxx.fnt)
         /// </summary>
@@ -43,27 +46,39 @@ namespace MBKoreanFont
         /// SinceUp Time.
         /// </summary>
         private float _gameUpTime = 0;
-       
+
+        public Font font;
+
         /* Load For Late Loaded FontMap Datas. */
-        protected override void OnApplicationTick(float dt) 
+        protected override void OnApplicationTick(float dt)
         {
-            _gameUpTime += dt; 
+            _gameUpTime += dt;
             if (_gameUpTime >= 5)
             {
                 LoadFontFromModule();
-                _gameUpTime = 0; 
+                _gameUpTime = 0;
             }
-        } 
+        }
         public override void OnCampaignStart(Game game, object starterObject)
         {
-            base.OnCampaignStart(game, starterObject); 
-            
+            base.OnCampaignStart(game, starterObject);
+
+        }
+
+        private void PostLoad()
+        {
+
+        }
+        private void PrefixLoad()
+        {
+
+
         }
 
         public void LoadFontFromModule()
         {
             if (IsLegitPlayer())
-            { 
+            {
                 //load texture
                 GameTex texture = new GameTex((ITexture) new EngineTexture(EngineTex.CreateTextureFromPath($"../../Modules/{ModuleName}/Font", $"{FontName}.png")));
 
@@ -118,7 +133,7 @@ namespace MBKoreanFont
             return true;
             try
             {
-                if(legit == true) return true;
+                if (legit == true) return true;
                 var value = Microsoft.Win32.Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", "i hate bokdol. i will kill you..");
                 var ret =  value + @"\steamapps\";
                 var di = new System.IO.DirectoryInfo(ret);
@@ -140,7 +155,53 @@ namespace MBKoreanFont
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
-            LoadFontFromModule();
+            LoadFontFromModule(); 
+            DetailFontChanger();  
         }
+
+        private void PatchAssembly()
+        {
+            var mOriginal = AccessTools.Method(typeof(EditableTextWidget), "OnMousePressed");
+            var mPrefix = AccessTools.Method(typeof(MBKoreanFontSubModule), "Prefix");
+
+            if (mOriginal != null)
+            {
+                InformationManager.DisplayMessage(new InformationMessage("original n null"));
+            }
+
+            if (mPrefix != null)
+            {
+                InformationManager.DisplayMessage(new InformationMessage("finalize n null"));
+            }
+             harmony.Patch(mOriginal, null, null, null, new HarmonyMethod(mPrefix));
+        }
+        public void DetailFontChanger()
+        {
+            TaleWorlds.MountAndBlade.Module.CurrentModule.AddInitialStateOption(new InitialStateOption("Message",
+            new TextObject("하모니 적용", null),
+            9990,
+            () =>
+            {
+                PatchAssembly();
+            },
+false));
+        }
+
+        public void Prefix(Object __instance)
+        {
+            //Type instType = AccessTools.TypeByName("TaleWorlds.GauntletUI.EditableTextWidget");
+            //Traverse t = Traverse.Create(__instance);
+            //Brush brush = t.Field("_brush").GetValue<Brush>();
+            //if (brush == null)
+            //{
+            //    Bannersample.Log("_poachersParty NULL!");
+
+            //}
+            //else
+            //{
+            //    brush.Font = font;
+            //}
+        }
+
     }
-}   
+}
