@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBKoreanFont", "KoreaneMod\MBKoreanFont.csproj", "{672F6DCD-7598-478E-81BA-D5417AEFC638}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBKoreanFont", "Mod\MBKoreanFont.csproj", "{672F6DCD-7598-478E-81BA-D5417AEFC638}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patcher", "Patcher\Patcher.csproj", "{6E5100FF-BAF0-430D-A7BE-4A4825553B9D}"
 EndProject
