@@ -10,7 +10,7 @@ namespace Patcher
     { 
         static void Main(string[] args)
         {  
-            XmlTextPatcher.Patch(Config.MB_SANDBOX_PATH);
+            PrefabPatcher.PrefabPatch(Config.MB_SANDBOX_PATH);
         }
     }
 }

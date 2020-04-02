@@ -32,8 +32,8 @@ namespace Patcher
         /// <summary>
         /// replace class name. (a to b)
         /// </summary>
-        public static readonly (string, string)[] ReplaceType = new (string, string)[]{
-            ("EditableTextWidget","MBKoreanFontTextWidget")
+        public static readonly (string, string, string)[] ReplaceType = new (string, string, string)[]{
+            (MB_SANDBOX_PATH, "EditableTextWidget","MBKoreanFontTextWidget")
         };
     }
 }
