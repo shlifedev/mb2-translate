@@ -52,7 +52,7 @@ namespace MBKoreanFont
             {
                 LoadFontFromModule();
                 _gameUpTime = float.NegativeInfinity;
-                
+                UIResourceManager.OnLanguageChange("한국어");
             }
         } 
         public override void OnCampaignStart(Game game, object starterObject)
