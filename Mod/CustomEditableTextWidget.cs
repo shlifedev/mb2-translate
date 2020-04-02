@@ -421,7 +421,7 @@
 //            if (this._lastFontBrush == this.Brush && (double)this._lastScale == (double)this.Context.Scale)
 //                return;
 //            this._editableText.StyleFontContainer.ClearFonts();
-//            Font font = UIResourceManager.FontFactory.DefaultFont;
+//            Font font = GetFont();
 //            foreach (Style style in this.Brush.Styles)
 //                this._editableText.StyleFontContainer.Add(style.Name, font, (float)this.Brush.FontSize * this.Context.Scale);
 //            this._lastFontBrush = this.Brush;
