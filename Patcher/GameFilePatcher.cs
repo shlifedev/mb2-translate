@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Patcher
 {
-    class Patcher
+    public class GameFilePatcher
     {
     }
 }
