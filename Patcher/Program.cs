@@ -13,8 +13,8 @@ namespace Patcher
 
         }
         static void Main(string[] args)
-        {   
-
+        {
+            EditableTextPatcher.ReplaceEditableTextToMBFontText();
         }
     }
 }
