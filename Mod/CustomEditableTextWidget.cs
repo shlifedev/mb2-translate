@@ -98,7 +98,7 @@
 //        public CustomEditableTextWidget(UIContext context)
 //          : base(context)
 //        {
-//            this._editableText = new EditableText((int)this.Size.X, (int)this.Size.Y, UIResourceManager.FontFactory.DefaultFont);
+//            this._editableText = new EditableText((int)this.Size.X, (int)this.Size.Y, context.FontFactory.DefaultFont);
 //            this.LayoutImp = (ILayout)new TextLayout((IText)this._editableText);
 //            this._realText = "";
 //            this._textHeight = -1;
