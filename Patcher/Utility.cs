@@ -10,7 +10,7 @@ namespace Patcher
     {
         static bool legit = false;
         /// <summary>
-        /// You Bokdol..?
+        /// 복돌 유저 검출
         /// </summary>
         /// <returns></returns>
         public static bool IsLegitPlayer()

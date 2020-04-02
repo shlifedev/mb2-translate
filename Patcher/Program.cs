@@ -8,9 +8,16 @@ namespace Patcher
 {
     class Program
     { 
-        static void Main(string[] args)
-        {  
+        static void StartPatch()
+        {
+
+            GameFilePatcher.Patch();
             PrefabPatcher.PrefabPatch(Config.MB_SANDBOX_PATH);
+
+        }
+        static void Main(string[] args)
+        {
+            StartPatch();
         }
     }
 }
