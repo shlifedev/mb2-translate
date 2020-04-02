@@ -43,10 +43,11 @@ namespace MBKoreanFont
         protected override void OnApplicationTick(float dt)
         {
             _gameUpTime += dt; 
-            if (_gameUpTime >= 3)
+            if (_gameUpTime >= 5)
             {
                 LoadFontFromModule();
                 _gameUpTime = float.NegativeInfinity;
+                
             }
         }
 
