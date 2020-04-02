@@ -13,11 +13,7 @@ namespace Patcher
         {
             get
             {
-                var value = Microsoft.Win32.Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", "i hate bokdol. i will kill you.."); 
-                var ret =  value + @"\steamapps\";
-                var di = new System.IO.DirectoryInfo(ret);
-                var bannerlordACF = di.GetFiles("*.acf").Where(x=>x.Name.Contains("261550")).First();  
-                return ret;
+                return @"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\";
             }
         }
         public static string MB_SANDBOX_PATH
@@ -27,12 +23,18 @@ namespace Patcher
             {
                 return MB_INSTALL_PATH + @"Modules\SandBox\";
             }
-        } 
+        }
         public static readonly string[] PatcherTarget = new string[]{
 
                 "Modules/MBKoreanFont",
                 "Modules/Native/ModuleData/Languages/KR",
                 "GUI/GauntletUI/Fonts/Languages.xml"
+        };
+        /// <summary>
+        /// replace class name. (a to b)
+        /// </summary>
+        public static readonly (string, string)[] ReplaceType = new (string, string)[]{
+            ("EditableTextWidget","MBKoreanFontTextWidget")
         };
     }
 }

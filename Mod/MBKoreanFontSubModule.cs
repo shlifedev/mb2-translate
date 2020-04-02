@@ -97,7 +97,8 @@ namespace MBKoreanFont
                 _localizationMap[XMLKey][index] = font;
             
             /* apply */
-            UIResourceManager.FontFactory.DefaultFont = font;
+            UIResourceManager.FontFactory.DefaultFont = font; 
+
         }
  
         protected override void OnSubModuleLoad()
@@ -106,4 +107,4 @@ namespace MBKoreanFont
             LoadFontFromModule(); 
         }
     }
-}
+}   

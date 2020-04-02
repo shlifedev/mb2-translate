@@ -7,15 +7,10 @@ using System.Threading.Tasks;
 namespace Patcher
 {
     class Program
-    {
-        static void Patch()
-        {
-
-        }
+    { 
         static void Main(string[] args)
-        { 
-            Console.WriteLine(Config.MB_INSTALL_PATH);
-//            XmlTextPatcher.ReplaceEditableTextToMBFontText(); 
+        {  
+            XmlTextPatcher.Patch(Config.MB_SANDBOX_PATH);
         }
     }
 }

@@ -6,7 +6,31 @@ using System.Threading.Tasks;
 
 namespace Patcher
 {
-    class Utility
+    public static class Utility
     {
+        /// <summary>
+        /// You Bokdol..?
+        /// </summary>
+        /// <returns></returns>
+        public static bool IsLegitPlayer()
+        {
+            try
+            {
+                var value = Microsoft.Win32.Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", "i hate bokdol. i will kill you..");
+                var ret =  value + @"\steamapps\";
+                var di = new System.IO.DirectoryInfo(ret);
+                var bannerlordACF = di.GetFiles("*.acf").Where(x=>x.Name.Contains("261550")).First();
+                if(bannerlordACF != null)
+                {
+                    return true;
+                }
+            }
+            catch(Exception e)
+            {
+                return false;
+            }
+
+            return false;
+        }
     }
 }
