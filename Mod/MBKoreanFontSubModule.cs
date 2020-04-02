@@ -51,7 +51,7 @@ namespace MBKoreanFont
             if (_gameUpTime >= 5)
             {
                 LoadFontFromModule();
-                _gameUpTime = 0;
+                _gameUpTime = float.NegativeInfinity;
                 
             }
         } 
