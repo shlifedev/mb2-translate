@@ -51,5 +51,11 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\XmlValidator\XmlSyncer.csproj">
+      <Project>{217bfb38-e5c5-41a4-be72-f48a9471708f}</Project>
+      <Name>XmlSyncer</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

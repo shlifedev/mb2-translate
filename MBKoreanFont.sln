@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBKoreanFont", "KoreaneMod\
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Patcher", "Patcher\Patcher.csproj", "{6E5100FF-BAF0-430D-A7BE-4A4825553B9D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlValidator", "XmlValidator\XmlValidator.csproj", "{217BFB38-E5C5-41A4-BE72-F48A9471708F}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSyncer", "XmlValidator\XmlSyncer.csproj", "{217BFB38-E5C5-41A4-BE72-F48A9471708F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
