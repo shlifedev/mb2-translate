@@ -303,7 +303,7 @@
     <Compile Include="CustomRichTextWidget.cs" />
     <Compile Include="MBKoreanFontSubModule.cs" />
     <Compile Include="CustomTextWidget.cs" />
-    <Compile Include="MBKoreanFontTextWidget.cs" />
+    <Compile Include="CustomEditableTextWidget.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextureLoader.cs" />
   </ItemGroup>
