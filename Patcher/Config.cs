@@ -16,11 +16,18 @@ namespace Patcher
                 return @"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\";
             }
         }
-        public static string MB_SANDBOX_PATH 
+        public static string MB_SANDBOX_PATH
         {
             get
             {
                 return MB_INSTALL_PATH + @"Modules\SandBox\";
+            }
+        }
+        public static string MB_NATIVE_PATH
+        {
+            get
+            {
+                return MB_INSTALL_PATH + @"Modules\Native\";
             }
         }
         public static readonly string[] PatcherTarget = new string[]{
@@ -33,7 +40,13 @@ namespace Patcher
         /// replace class name. (a to b)
         /// </summary>
         public static readonly (string, string, string)[] ReplaceType = new (string, string, string)[]{
-            (MB_SANDBOX_PATH, "EditableTextWidget","MBKoreanFontTextWidget")
+            (MB_SANDBOX_PATH, "EditableTextWidget","MBKoreanFontTextWidget"),
+            (MB_SANDBOX_PATH, "TextWidget","CustomTextWidget"),
+            (MB_SANDBOX_PATH, "RichTextWidget","CustomRichTextWidget"),
+            (MB_NATIVE_PATH, "EditableTextWidget","MBKoreanFontTextWidget"),
+            (MB_NATIVE_PATH, "TextWidget","CustomTextWidget"),
+            (MB_NATIVE_PATH, "RichTextWidget","CustomRichTextWidget"),
+
         };
     }
 }

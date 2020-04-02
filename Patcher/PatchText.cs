@@ -9,29 +9,21 @@ namespace Patcher
     public static class PatchText
     {
 
-        public static string SANDBOX_SUB_XML = @"
-<?xml version=""1.0"" encoding=""utf-8""?>
+        public static string SANDBOX_SUB_XML = @"<?xml version=""1.0"" encoding=""utf-8""?>
 <Module>
-	<Name value = ""Sandbox""/>
-
-    <Id value = ""Sandbox""/>
+<Name value = ""Sandbox""/>
+<Id value = ""Sandbox""/>
 	<Version value = ""e1.0.2""/>
-
     <DefaultModule value=""true""/>
 	<SingleplayerModule value=""true""/>
   <Official value =""true"" />
   <DependedModules>
 		<DependedModule Id=""Native""/>
-
         <DependedModule Id=""SandBoxCore""/>
 		<DependedModule Id=""MBKoreanFont""/>
-
     </DependedModules>
-
     <SubModules>
-
         <SubModule>
-
             <Name value = ""SandBox""/>
 			<DLLName value = ""SandBox.dll""/>
 
@@ -202,8 +194,7 @@ namespace Patcher
 	</Xmls>
 </Module>
 ";
-        public static string LANGUAGE_XML = @"
-  <!-- Korean Patch by 마앤블 공식카페 https://cafe.naver.com/warband -->
+        public static string LANGUAGE_XML = @"<!-- Korean Patch by 마앤블 공식카페 https://cafe.naver.com/warband -->
 <Languages DefaultLanguage=""English"">
   <!--Maps English fonts to Foreign fonts to use on language change--> 
   <!-- English -->

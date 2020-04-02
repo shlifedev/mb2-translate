@@ -13,7 +13,7 @@ namespace Patcher
         /// 프리팹 패치
         /// </summary>
         /// <param name="baseModulePath"></param>
-        public static void PrefabPatch(string baseModulePath)
+        public static void PrefabPatch()
         {
             foreach (var data in Config.ReplaceType)
             {
@@ -34,13 +34,20 @@ namespace Patcher
 
         public static void ReplaceXmlWrite(string baseModulePath, string oldValue, string newValue)
         {
-            var path = baseModulePath;
-            System.IO.DirectoryInfo guiDataPath = new System.IO.DirectoryInfo(path +"GUI/Prefabs");
-            foreach (var searchedXmlFile in guiDataPath.GetFiles("*.xml", System.IO.SearchOption.AllDirectories))
+            try
             {
-                var readedXml = System.IO.File.ReadAllText(searchedXmlFile.FullName);
-                var patchdXml = readedXml.Replace(oldValue, newValue);
-                System.IO.File.WriteAllText(searchedXmlFile.FullName, patchdXml);
+                var path = baseModulePath;
+                System.IO.DirectoryInfo guiDataPath = new System.IO.DirectoryInfo(path +"GUI/Prefabs");
+                foreach (var searchedXmlFile in guiDataPath.GetFiles("*.xml", System.IO.SearchOption.AllDirectories))
+                {
+                    var readedXml = System.IO.File.ReadAllText(searchedXmlFile.FullName);
+                    var patchdXml = readedXml.Replace(oldValue, newValue);
+                    System.IO.File.WriteAllText(searchedXmlFile.FullName, patchdXml);
+                }
+            }
+            catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
             }
         }
 

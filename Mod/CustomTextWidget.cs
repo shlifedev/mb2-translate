@@ -5,11 +5,12 @@
 // Assembly location: C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\bin\Win64_Shipping_Client\TaleWorlds.GauntletUI.dll
 
 using System.Numerics;
+using TaleWorlds.Engine.GauntletUI;
 using TaleWorlds.TwoDimension;
 
 namespace TaleWorlds.GauntletUI
 {
-    public class TextWidget : ImageWidget
+    public class CustomTextWidget : ImageWidget
     {
         private readonly TaleWorlds.TwoDimension.Text _text;
 
@@ -62,7 +63,7 @@ namespace TaleWorlds.GauntletUI
             }
         }
 
-        public TextWidget(UIContext context)
+        public CustomTextWidget(UIContext context)
           : base(context)
         {
             this._text = new TaleWorlds.TwoDimension.Text((int)this.Size.X, (int)this.Size.Y, context.FontFactory.DefaultFont);
@@ -89,9 +90,9 @@ namespace TaleWorlds.GauntletUI
             this._text.VerticalAlignment = this.Brush.TextVerticalAlignment;
             this._text.FontSize = num;
             if (this.Brush.Font != null)
-                this._text.Font = this.Context.FontFactory.GetMappedFontForLocalization(this.Brush.Font.Name);
+                this._text.Font = UIResourceManager.FontFactory.DefaultFont;
             else
-                this._text.Font = this.Context.FontFactory.DefaultFont;
+                this._text.Font = UIResourceManager.FontFactory.DefaultFont;
         }
 
         protected override void OnRender(

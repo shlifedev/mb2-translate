@@ -12,8 +12,7 @@ namespace Patcher
         {
 
             GameFilePatcher.Patch();
-            PrefabPatcher.PrefabPatch(Config.MB_SANDBOX_PATH);
-
+            PrefabPatcher.PrefabPatch(); 
         }
         static void Main(string[] args)
         {
