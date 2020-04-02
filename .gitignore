@@ -8,10 +8,8 @@
 
 # Build results
 
-[Dd]ebug/
-[Rr]elease/
-x64/
-[Bb]in/
+[Dd]ebug/ 
+x64/ 
 [Oo]bj/
 
 # MSTest test Results

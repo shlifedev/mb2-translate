@@ -1,0 +1,25 @@
+<Module>
+    <Name value="MBKoreanFont"/>
+    <Id value="MBKoreanFont"/>
+    <Version value="v1.0.0"/>
+    <SingleplayerModule value="true"/>
+    <MultiplayerModule value="false"/>
+  <DependedModules>
+		<DependedModule Id="CustomBattle"/>  
+  </DependedModules>
+    <SubModules>
+        <!-- The following SubModule element is optional. You can remove this portion if your mod does not have a DLL associated with it. -->
+        <SubModule>
+            <Name value="MBKoreanFontSubModule"/>
+            <!-- Path to the DLL File, if your Mod is called MyModule then it should be   -->
+            <DLLName value="../../Modules/MBKoreanFont/bin/Win64_Shipping_Client/MBKoreanFont.dll"/>
+            <SubModuleClassType value="MBKoreanFont.MBKoreanFontSubModule"/>
+            <Tags>
+                <Tag key="DedicatedServerType" value="none" />
+                <Tag key="IsNoRenderModeElement" value="false" />
+            </Tags>
+        </SubModule>
+    </SubModules>
+    <Xmls>
+    </Xmls>
+</Module>
