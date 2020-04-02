@@ -10,7 +10,7 @@ using TaleWorlds.TwoDimension;
 
 namespace TaleWorlds.GauntletUI
 {
-    public class MBKoreanFontTextWidget : Widget
+    public class MBKoreanFontTextWidget : EditableTextWidget
     {
         private readonly char _obfuscationChar = '*';
         private float _lastScale = -1f;
