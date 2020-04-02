@@ -12,7 +12,7 @@ namespace Patcher
         {
 
             //GameFilePatcher.Patch();
-         /   PrefabPatcher.PrefabUnPatch(); 
+         //   PrefabPatcher.PrefabUnPatch(); 
         }
         static void Main(string[] args)
         {
