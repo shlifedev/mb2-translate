@@ -16,6 +16,9 @@ using TaleWorlds.Core;
 
 namespace MBKoreanFont
 {
+    /// <summary>
+    /// Special Thanks : Akintos  
+    /// </summary>
     public class MBKoreanFontSubModule : MBSubModuleBase
     {
         /// <summary>
@@ -76,21 +79,23 @@ namespace MBKoreanFont
            
             Font font = new Font($"{FontName}", $"../../Modules/{ModuleName}/Font/{FontName}.fnt", spriteData);
             /* reflection font factory */
-            Dictionary<string, Font> dictionary1 = 
+            Dictionary<string, Font> _bitmapFont = 
                 typeof (FontFactory).GetField("_bitmapFonts", BindingFlags.Instance | BindingFlags.NonPublic)
                 .GetValue((object) UIResourceManager.FontFactory) 
                 as Dictionary<string, Font>;
 
 
-            Dictionary<string, Dictionary<string, Font>> dictionary2 = 
+            Dictionary<string, Dictionary<string, Font>> _localizationMap = 
                 typeof (FontFactory).GetField("_fontLocalizationMap", BindingFlags.Instance | BindingFlags.NonPublic)
                 .GetValue((object) UIResourceManager.FontFactory) 
                 as Dictionary<string, Dictionary<string, Font>>;
-            dictionary1[CoverFontName] = font;
+            _bitmapFont[CoverFontName] = font;
            
             /* cover font data. */
-            foreach (string index in new List<string>((IEnumerable<string>)dictionary2[XMLKey].Keys))
-                dictionary2[XMLKey][index] = font;
+            foreach (string index in new List<string>((IEnumerable<string>)_localizationMap[XMLKey].Keys))
+                _localizationMap[XMLKey][index] = font;
+            
+            /* apply */
             UIResourceManager.FontFactory.DefaultFont = font;
         }
  
