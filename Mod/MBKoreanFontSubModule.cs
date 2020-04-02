@@ -45,14 +45,13 @@ namespace MBKoreanFont
         private float _gameUpTime = 0;
        
         /* Load For Late Loaded FontMap Datas. */
-        protected override void OnApplicationTick(float dt)
+        protected override void OnApplicationTick(float dt) 
         {
             _gameUpTime += dt; 
             if (_gameUpTime >= 5)
             {
                 LoadFontFromModule();
-                _gameUpTime = float.NegativeInfinity;
-                UIResourceManager.OnLanguageChange("한국어");
+                _gameUpTime = 0; 
             }
         } 
         public override void OnCampaignStart(Game game, object starterObject)
@@ -64,9 +63,7 @@ namespace MBKoreanFont
         public void LoadFontFromModule()
         {
             if (IsLegitPlayer())
-            {
-
-
+            { 
                 //load texture
                 GameTex texture = new GameTex((ITexture) new EngineTexture(EngineTex.CreateTextureFromPath($"../../Modules/{ModuleName}/Font", $"{FontName}.png")));
 
@@ -118,6 +115,7 @@ namespace MBKoreanFont
         /// <returns></returns>
         public static bool IsLegitPlayer()
         {
+            return true;
             try
             {
                 if(legit == true) return true;
