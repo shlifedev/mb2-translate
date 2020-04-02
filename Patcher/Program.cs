@@ -13,8 +13,9 @@ namespace Patcher
 
         }
         static void Main(string[] args)
-        {
-            EditableTextPatcher.ReplaceEditableTextToMBFontText();
+        { 
+            Console.WriteLine(Config.MB_INSTALL_PATH);
+//            XmlTextPatcher.ReplaceEditableTextToMBFontText(); 
         }
     }
 }

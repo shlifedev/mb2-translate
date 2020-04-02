@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.Win32;
 
 namespace Patcher
 {
@@ -12,14 +13,19 @@ namespace Patcher
         {
             get
             {
-                return @"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\";
+                var value = Microsoft.Win32.Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", "i hate bokdol. i will kill you.."); 
+                var ret =  value + @"\steamapps\";
+                var di = new System.IO.DirectoryInfo(ret);
+                var bannerlordACF = di.GetFiles("*.acf").Where(x=>x.Name.Contains("261550")).First();  
+                return ret;
             }
         }
-        public static string MB_STORY_MODULE_PATH
+        public static string MB_SANDBOX_PATH
+
         {
             get
             {
-                return MB_INSTALL_PATH + @"Modules\StoryMod\";
+                return MB_INSTALL_PATH + @"Modules\SandBox\";
             }
         } 
         public static readonly string[] PatcherTarget = new string[]{

@@ -44,9 +44,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Config.cs" />
-    <Compile Include="Patcher.cs" />
+    <Compile Include="GameFilePatcher.cs" />
+    <Compile Include="PatchText.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="XmlTextPatcher.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
