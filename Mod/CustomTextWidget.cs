@@ -90,10 +90,11 @@ namespace TaleWorlds.GauntletUI
             this._text.VerticalAlignment = this.Brush.TextVerticalAlignment;
             this._text.FontSize = num;
             if (this.Brush.Font != null)
-                this._text.Font = UIResourceManager.FontFactory.DefaultFont;
+                this._text.Font = this.Context.FontFactory.GetMappedFontForLocalization(this.Brush.Font.Name);
             else
-                this._text.Font = UIResourceManager.FontFactory.DefaultFont;
+                this._text.Font = this.Context.FontFactory.DefaultFont;
         }
+
 
         protected override void OnRender(
           TwoDimensionContext twoDimensionContext,

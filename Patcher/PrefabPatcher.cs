@@ -24,7 +24,7 @@ namespace Patcher
         /// 프리팹 패치
         /// </summary>
         /// <param name="baseModulePath"></param>
-        public static void PrefabUnPatch(string baseModulePath)
+        public static void PrefabUnPatch()
         {
             foreach (var data in Config.ReplaceType)
             {
