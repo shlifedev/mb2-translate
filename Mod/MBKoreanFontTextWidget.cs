@@ -418,9 +418,12 @@ namespace TaleWorlds.GauntletUI
             if (this._lastFontBrush == this.Brush && (double)this._lastScale == (double)this.Context.Scale)
                 return;
             this._editableText.StyleFontContainer.ClearFonts();
-            Font font = this.Brush.Font ?? this.Context.FontFactory.DefaultFont;
+            Font font = GetFont();
             foreach (Style style in this.Brush.Styles)
+            {
+                style.Font = font;
                 this._editableText.StyleFontContainer.Add(style.Name, font, (float)this.Brush.FontSize * this.Context.Scale);
+            }
             this._lastFontBrush = this.Brush;
             this._lastScale = this.Context.Scale;
         }
@@ -455,6 +458,7 @@ namespace TaleWorlds.GauntletUI
             {
                 DrawObject2D drawObject2D = part.DrawObject2D;
                 Style styleOrDefault = this.Brush.GetStyleOrDefault(part.Style);
+               
                 Font font = this.GetFont(styleOrDefault);
                 int fontSize;
                 float num1 = (float) (fontSize = styleOrDefault.FontSize) * this.Context.Scale;
