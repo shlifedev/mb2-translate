@@ -24,8 +24,7 @@ namespace MBKoreanFont
     /// </summary>
     public class MBKoreanFontSubModule : MBSubModuleBase
     {
-        private static Harmony harmony = new Harmony("de.schplorg.bannerfix");
-
+        private static bool legit = false; 
         /// <summary>
         /// Your Font File Name. (xxx.png, xxx.fnt)
         /// </summary>
@@ -47,7 +46,7 @@ namespace MBKoreanFont
         /// </summary>
         private float _gameUpTime = 0;
 
-        public Font font;
+        public static Font font;
 
         /* Load For Late Loaded FontMap Datas. */
         protected override void OnApplicationTick(float dt)
@@ -58,23 +57,7 @@ namespace MBKoreanFont
                 LoadFontFromModule();
                 _gameUpTime = 0;
             }
-        }
-        public override void OnCampaignStart(Game game, object starterObject)
-        {
-            base.OnCampaignStart(game, starterObject);
-
-        }
-
-        private void PostLoad()
-        {
-
-        }
-        private void PrefixLoad()
-        {
-
-
-        }
-
+        } 
         public void LoadFontFromModule()
         {
             if (IsLegitPlayer())
@@ -120,10 +103,7 @@ namespace MBKoreanFont
             {
                 InformationManager.DisplayMessage(new InformationMessage("what the bok dol bok d  o  l    d    . . .           ."));
             }
-        }
-
-
-        private static bool legit = false;
+        }  
         /// <summary>
         /// You Bokdol..?
         /// </summary>
@@ -154,54 +134,13 @@ namespace MBKoreanFont
 
         protected override void OnSubModuleLoad()
         {
-            base.OnSubModuleLoad();
-            LoadFontFromModule(); 
-            DetailFontChanger();  
+            base.OnSubModuleLoad(); 
+            LoadFontFromModule();
+            Harmony harmony = new Harmony("de.schplorg.bannerfix");
+            harmony.PatchAll(); 
         }
-
-        private void PatchAssembly()
-        {
-            var mOriginal = AccessTools.Method(typeof(EditableTextWidget), "OnMousePressed");
-            var mPrefix = AccessTools.Method(typeof(MBKoreanFontSubModule), "Prefix");
-
-            if (mOriginal != null)
-            {
-                InformationManager.DisplayMessage(new InformationMessage("original n null"));
-            }
-
-            if (mPrefix != null)
-            {
-                InformationManager.DisplayMessage(new InformationMessage("finalize n null"));
-            }
-             harmony.Patch(mOriginal, null, null, null, new HarmonyMethod(mPrefix));
-        }
-        public void DetailFontChanger()
-        {
-            TaleWorlds.MountAndBlade.Module.CurrentModule.AddInitialStateOption(new InitialStateOption("Message",
-            new TextObject("하모니 적용", null),
-            9990,
-            () =>
-            {
-                PatchAssembly();
-            },
-false));
-        }
-
-        public void Prefix(Object __instance)
-        {
-            //Type instType = AccessTools.TypeByName("TaleWorlds.GauntletUI.EditableTextWidget");
-            //Traverse t = Traverse.Create(__instance);
-            //Brush brush = t.Field("_brush").GetValue<Brush>();
-            //if (brush == null)
-            //{
-            //    Bannersample.Log("_poachersParty NULL!");
-
-            //}
-            //else
-            //{
-            //    brush.Font = font;
-            //}
-        }
-
-    }
+         
+    } 
 }
+
+ 
