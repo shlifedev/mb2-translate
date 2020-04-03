@@ -5,9 +5,9 @@ VisualStudioVersion = 15.0.28307.1000
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBKoreanFont", "Mod\MBKoreanFont.csproj", "{672F6DCD-7598-478E-81BA-D5417AEFC638}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "XmlSyncer", "XmlValidator\XmlSyncer.csproj", "{217BFB38-E5C5-41A4-BE72-F48A9471708F}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBKoreanFontInstaller", "MBKoreanFontInstaller\MBKoreanFontInstaller.csproj", "{462C0142-71FC-4E30-B383-CBF8E917653E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBGoogleDrive", "MBKoreanFontInstallerConsole\MBGoogleDrive.csproj", "{F2FB7F40-5724-444A-947C-D096F495496B}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -25,14 +25,6 @@ Global
 		{672F6DCD-7598-478E-81BA-D5417AEFC638}.Release|Any CPU.Build.0 = Release|Any CPU
 		{672F6DCD-7598-478E-81BA-D5417AEFC638}.Release|x64.ActiveCfg = Release|x64
 		{672F6DCD-7598-478E-81BA-D5417AEFC638}.Release|x64.Build.0 = Release|x64
-		{217BFB38-E5C5-41A4-BE72-F48A9471708F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{217BFB38-E5C5-41A4-BE72-F48A9471708F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{217BFB38-E5C5-41A4-BE72-F48A9471708F}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{217BFB38-E5C5-41A4-BE72-F48A9471708F}.Debug|x64.Build.0 = Debug|Any CPU
-		{217BFB38-E5C5-41A4-BE72-F48A9471708F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{217BFB38-E5C5-41A4-BE72-F48A9471708F}.Release|Any CPU.Build.0 = Release|Any CPU
-		{217BFB38-E5C5-41A4-BE72-F48A9471708F}.Release|x64.ActiveCfg = Release|Any CPU
-		{217BFB38-E5C5-41A4-BE72-F48A9471708F}.Release|x64.Build.0 = Release|Any CPU
 		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug|x64.ActiveCfg = Debug|Any CPU
@@ -41,6 +33,14 @@ Global
 		{462C0142-71FC-4E30-B383-CBF8E917653E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{462C0142-71FC-4E30-B383-CBF8E917653E}.Release|x64.ActiveCfg = Release|Any CPU
 		{462C0142-71FC-4E30-B383-CBF8E917653E}.Release|x64.Build.0 = Release|Any CPU
+		{F2FB7F40-5724-444A-947C-D096F495496B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2FB7F40-5724-444A-947C-D096F495496B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2FB7F40-5724-444A-947C-D096F495496B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{F2FB7F40-5724-444A-947C-D096F495496B}.Debug|x64.Build.0 = Debug|Any CPU
+		{F2FB7F40-5724-444A-947C-D096F495496B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2FB7F40-5724-444A-947C-D096F495496B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2FB7F40-5724-444A-947C-D096F495496B}.Release|x64.ActiveCfg = Release|Any CPU
+		{F2FB7F40-5724-444A-947C-D096F495496B}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

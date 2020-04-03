@@ -5,10 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:MBKoreanFontInstaller"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        <Grid.RowDefinitions>
-            
-        </Grid.RowDefinitions>
+        Title="MainWindow" Height="250" Width="600">
+    <Grid> 
     </Grid>
 </Window>
