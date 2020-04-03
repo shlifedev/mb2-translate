@@ -22,7 +22,7 @@ namespace MBKoreanFont
             {
                 if (_brush == null)
                 {
-                    Bannersample.Log("brush is null.");
+                  
                 }
                 else
                 {
