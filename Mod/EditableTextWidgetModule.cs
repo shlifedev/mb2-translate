@@ -11,11 +11,10 @@ namespace MBKoreanFont
     public static class EditableTextWidgetModule
     {
         public static System.Collections.Generic.HashSet<Object> ApplyMap = new System.Collections.Generic.HashSet<Object>();
-        [HarmonyPatch(typeof(EditableTextWidget), "OnUpdate")]
+        [HarmonyPatch(typeof(EditableTextWidget), "OnUpdate")] 
+        //OnUpdate에서 호출합니다.
         static void Prefix(Object __instance)
-        {
-         
-           
+        { 
             Type instType = AccessTools.TypeByName("TaleWorlds.GauntletUI.EditableTextWidget");
             Traverse t = Traverse.Create(__instance); 
             Brush _brush = t.Field("_brush").GetValue<Brush>();

@@ -127,8 +127,7 @@ namespace MBKoreanFont
             catch (Exception e)
             {
                 return legit;
-            }
-
+            } 
             return legit;
         }
 
