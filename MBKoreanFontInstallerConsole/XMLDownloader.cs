@@ -85,8 +85,7 @@ namespace MBKoreanFontInstallerConsole
                 System.IO.Directory.CreateDirectory(data.savePath);
                 System.IO.File.WriteAllText(data.savePath+"/"+fileName+".xml", xmlData); 
                 try
-                {
-                 
+                { 
                     XmlDocument document = new XmlDocument();
                     document.Load(data.savePath + "/" + fileName + ".xml");
                 }
