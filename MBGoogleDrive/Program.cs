@@ -16,7 +16,35 @@ using System.Xml;
 namespace GoogleDrive
 {
     class Program
-    { 
+    {
+        static string[] Scopes = { DriveService.Scope.DriveReadonly };
+        static string ApplicationName = "Drive API .NET Quickstart";
+
+        static void Credential2()
+        { 
+            Console.WriteLine("\t MB Korean Downloader :: 사용자 인증 중 입니다.");
+            UserCredential credential; 
+            using (var stream =
+                new FileStream("secret.json", FileMode.Open, FileAccess.Read))
+            { 
+                string credPath = "token.json";
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.Load(stream).Secrets,
+                    Scopes,
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
+                Console.WriteLine("Credential file saved to: " + credPath);
+            }
+
+            // Create Drive API service.
+            var service = new DriveService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
+            DriveManager.Init(service);
+        }
         static void Credential()
         {
             Google.Apis.Services.BaseClientService.Initializer bcs = new Google.Apis.Services.BaseClientService.Initializer();
@@ -28,7 +56,7 @@ namespace GoogleDrive
          
         static void Main(string[] args)
         { 
-            Credential();
+            Credential2();
             Download();
         }
 

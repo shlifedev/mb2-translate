@@ -31,10 +31,7 @@ namespace MBKoreanFontInstallerConsole
         {
             String fileId = fileID;
             var request = Service.Files.Export(fileId, "text/plain");
-            var stream = new System.IO.MemoryStream();
-            // Add a handler which will be notified on progress changes.
-            // It will notify on each chunk download and when the
-            // download is completed or failed.
+            var stream = new System.IO.MemoryStream(); 
             request.MediaDownloader.ProgressChanged +=
                     (IDownloadProgress progress) =>
                     {
@@ -52,7 +49,7 @@ namespace MBKoreanFontInstallerConsole
                                 }
                             case DownloadStatus.Failed:
                                 {
-                                    Console.WriteLine("Download failed.");
+                                    Console.WriteLine("Download failed." +"," + progress.Exception);
                                     break;
                                 }
                         }
