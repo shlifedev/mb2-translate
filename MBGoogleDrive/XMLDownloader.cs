@@ -30,14 +30,15 @@ namespace MBKoreanFontInstallerConsole
         public void SaveCacheData()
         {
             var json = JsonConvert.SerializeObject(cachedXML);
-            System.IO.File.WriteAllText("appCache", json);
+            System.IO.File.WriteAllText("appCache.json", json);
         }
 
         public void LoadCacheData()
         {
-            if (System.IO.File.Exists("appCache"))
+            if (System.IO.File.Exists("appCache.json"))
             {
-                var json = JsonConvert.DeserializeObject<List<CachedXML>>("appCache");
+                var data = System.IO.File.ReadAllText("appCache.json");
+                var json = JsonConvert.DeserializeObject<List<CachedXML>>(data);
                 this.cachedXML = json;
             }
             else
