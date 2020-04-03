@@ -47,10 +47,10 @@ namespace GoogleDrive
         static void Main(string[] args)
         {
             Credential();
-            A();
+            Download();
         }
 
-        static void A()
+        static void Download()
         {
             XMLDownloader dl = new XMLDownloader();
             dl.Init();
