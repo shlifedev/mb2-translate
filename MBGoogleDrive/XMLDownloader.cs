@@ -44,14 +44,7 @@ namespace MBKoreanFontInstallerConsole
             {
                 cachedXML.Clear();
             }
-        }
-        public static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
+        } 
         public List<GoogleFile> GetFolderFiles()
         {
             List<GoogleFile> files = new List<GoogleFile>();
@@ -61,9 +54,7 @@ namespace MBKoreanFontInstallerConsole
                 files.AddRange(downloadRequireList);
             }
             return files;
-        }
-
-
+        } 
         public void DownloadAll(string savePath = "KR")
         {
             LoadCacheData();
