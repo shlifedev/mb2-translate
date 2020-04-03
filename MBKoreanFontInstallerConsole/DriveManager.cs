@@ -1,4 +1,5 @@
 ﻿using Google.Apis.Auth.OAuth2;
+using Google.Apis.Download;
 using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
@@ -21,6 +22,54 @@ namespace MBKoreanFontInstallerConsole
         {
             Service = service;
         }
+        public static string GetFileName(string fileID)
+        {
+            return Service.Files.Get(fileID).Execute().Name;
+        }
+
+        public static string DownloadXML(string fileID)
+        {
+            String fileId = fileID;
+            var request = Service.Files.Export(fileId, "text/plain");
+            var stream = new System.IO.MemoryStream();
+            // Add a handler which will be notified on progress changes.
+            // It will notify on each chunk download and when the
+            // download is completed or failed.
+            request.MediaDownloader.ProgressChanged +=
+                    (IDownloadProgress progress) =>
+                    {
+                        switch (progress.Status)
+                        {
+                            case DownloadStatus.Downloading:
+                                {
+                                    Console.WriteLine(progress.BytesDownloaded);
+                                    break;
+                                }
+                            case DownloadStatus.Completed:
+                                {
+                                    Console.WriteLine("Download complete.");
+                                    break;
+                                }
+                            case DownloadStatus.Failed:
+                                {
+                                    Console.WriteLine("Download failed.");
+                                    break;
+                                }
+                        }
+                    };
+
+            request.Download(stream);
+            var v = System.Text.Encoding.UTF8.GetString(stream.ToArray());
+            return v;
+        }
+
+        private static void SaveStream(System.IO.MemoryStream stream, string saveTo)
+        {
+            using (System.IO.FileStream file = new System.IO.FileStream(saveTo, System.IO.FileMode.Create, System.IO.FileAccess.Write))
+            {
+                stream.WriteTo(file);
+            }
+        }
 
         public static IEnumerable<Google.Apis.Drive.v3.Data.File> GetFolderFiles(string folderID, string filterExtention = null)
         {
@@ -28,7 +77,7 @@ namespace MBKoreanFontInstallerConsole
             request.Q = $"'{folderID}' in parents";
 
             if (filterExtention != null)
-            { 
+            {
                 var executeResult = request.Execute().Files.Where(x=>x.FullFileExtension.Contains(filterExtention));
                 return executeResult;
             }
@@ -36,7 +85,7 @@ namespace MBKoreanFontInstallerConsole
             {
                 var executeResult = request.Execute().Files;
                 return executeResult;
-            } 
+            }
         }
     }
 }

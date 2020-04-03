@@ -11,13 +11,14 @@ using System.Linq;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using System.Xml;
 
 namespace GoogleDrive
 {
     class Program
-    { 
+    {
         static string[] Scopes = { DriveService.Scope.DriveReadonly };
-        static string ApplicationName = "Drive API .NET Quickstart"; 
+        static string ApplicationName = "Drive API .NET Quickstart";
         static void Credential()
         {
             UserCredential credential;
@@ -41,13 +42,20 @@ namespace GoogleDrive
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
-            DriveManager.Init(service); 
+            DriveManager.Init(service);
         }
         static void Main(string[] args)
         {
             Credential();
-            var fils = DriveManager.GetFolderFiles("folder id");
-        } 
- 
+            A();
+        }
+
+        static void A()
+        {
+            XMLDownloader dl = new XMLDownloader();
+            dl.Init();
+            dl.DownloadAll();
+        }
+
     }
 }
