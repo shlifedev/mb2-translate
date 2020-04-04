@@ -18,11 +18,11 @@ namespace MBKoreanFontInstallerConsole
     public class XMLDownloader
     {
         public List<CachedXML> cachedXML = new List<CachedXML>();
-        public List<string> DownloadFolders = new List<string>();
+        public List<(string,string)> DownloadFolders = new List<(string,string)>();
         public void Init()
         {
-            DownloadFolders.Add("1BlL7Nk8btu4s05vIsPNlUJn_iF8aiu3R");
-            DownloadFolders.Add("1LWi0qud9RU_pfIDwTTNEWD9wvjAhfwzO"); 
+            DownloadFolders.Add(("1BlL7Nk8btu4s05vIsPNlUJn_iF8aiu3R", "Native"));
+            DownloadFolders.Add(("1LWi0qud9RU_pfIDwTTNEWD9wvjAhfwzO" , "Sandbox")); 
         }
          
         private static Random random = new Random();
@@ -45,17 +45,19 @@ namespace MBKoreanFontInstallerConsole
             {
                 cachedXML.Clear();
             }
-        } 
+        }
         public List<GoogleFile> GetFolderFiles()
         {
             List<GoogleFile> files = new List<GoogleFile>();
             foreach (var data in DownloadFolders)
             {
-                var downloadRequireList = DriveManager.GetFolderFiles(data).ToList();
+                var downloadRequireList = DriveManager.GetFolderFiles(data.Item1).ToList();
                 files.AddRange(downloadRequireList);
             }
             return files;
-        } 
+        }
+         
+  
         public void DownloadAll(string savePath = "KR")
         {
             LoadCacheData();
@@ -71,11 +73,11 @@ namespace MBKoreanFontInstallerConsole
                     };
                     cacheData.originalFileName = DriveManager.GetFileName(cacheData.id);
                     cachedXML.Add(cacheData);
-                    fileName = cacheData.originalFileName;
+                    fileName = cacheData.originalFileName + "_" + data.Id.Substring(0, 6);
                 }
                 else
                 {
-                    fileName = cacheData.originalFileName;
+                    fileName = cacheData.originalFileName +"_"+ data.Id.Substring(0,6);
                 } 
                 var xmlData = DriveManager.DownloadXML(data.Id); 
                 Console.ForegroundColor = ConsoleColor.Green;

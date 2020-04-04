@@ -49,7 +49,7 @@ namespace MBKoreanFontInstallerConsole
                                 }
                             case DownloadStatus.Failed:
                                 {
-                                    Console.WriteLine("Download failed." +"," + progress.Exception);
+                                    Console.WriteLine("Download failed.");
                                     break;
                                 }
                         }
