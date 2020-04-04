@@ -6,15 +6,12 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Schema;
 using GoogleFile = Google.Apis.Drive.v3.Data.File;
-using Newtonsoft.Json;
-namespace MBKoreanFontInstallerConsole
-{
+using Newtonsoft.Json; 
     public class CachedXML
     {
         public string id;
-        public string originalFileName; 
-    }
- 
+        public string originalFileName;
+    } 
     public class XMLDownloader
     {
         public List<CachedXML> cachedXML = new List<CachedXML>();
@@ -22,9 +19,10 @@ namespace MBKoreanFontInstallerConsole
         public void Init()
         {
             DownloadFolders.Add(("1BlL7Nk8btu4s05vIsPNlUJn_iF8aiu3R", "Native"));
-            DownloadFolders.Add(("1LWi0qud9RU_pfIDwTTNEWD9wvjAhfwzO" , "Sandbox")); 
+            DownloadFolders.Add(("1LWi0qud9RU_pfIDwTTNEWD9wvjAhfwzO", "Sandbox"));
+
         }
-         
+
         private static Random random = new Random();
 
         public void SaveCacheData()
@@ -57,19 +55,21 @@ namespace MBKoreanFontInstallerConsole
             return files;
         }
          
-  
+
+
         public void DownloadAll(string savePath = "KR")
         {
             LoadCacheData();
-            var files = GetFolderFiles(); 
-            foreach(var data in files)
+            var files = GetFolderFiles();
+            foreach (var data in files)
             {
                 string fileName = data.Id;
                 var cacheData = cachedXML.Find(x=>x.id == data.Id);
                 if (cacheData == null)
                 {
-                    cacheData = new CachedXML() { 
-                    id = data.Id
+                    cacheData = new CachedXML()
+                    {
+                        id = data.Id
                     };
                     cacheData.originalFileName = DriveManager.GetFileName(cacheData.id);
                     cachedXML.Add(cacheData);
@@ -77,13 +77,13 @@ namespace MBKoreanFontInstallerConsole
                 }
                 else
                 {
-                    fileName = cacheData.originalFileName +"_"+ data.Id.Substring(0,6);
-                } 
-                var xmlData = DriveManager.DownloadXML(data.Id); 
+                    fileName = cacheData.originalFileName + "_" + data.Id.Substring(0, 6);
+                }
+                var xmlData = DriveManager.DownloadXML(data.Id);
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine($"{fileName} Downloaded!");
                 Console.ForegroundColor = ConsoleColor.White;
-               
+
                 //create di
                 System.IO.Directory.CreateDirectory(savePath);
                 System.IO.File.WriteAllText(savePath + "/" + fileName + ".xml", xmlData);
@@ -100,8 +100,7 @@ namespace MBKoreanFontInstallerConsole
                     Console.Write(" File Has Error!\n" + e.Message);
                     Console.ForegroundColor = ConsoleColor.White;
                 }
-            } 
+            }
             SaveCacheData();
-        } 
-    }
-}
+        }
+    } 

@@ -2,8 +2,7 @@
 using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
-using Google.Apis.Util.Store;
-using MBKoreanFontInstallerConsole;
+using Google.Apis.Util.Store; 
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -56,10 +55,31 @@ namespace GoogleDrive
          
         static void Main(string[] args)
         { 
-            Credential2();
-            Download();
+            Console.WriteLine("\t 실행 할 기능 선택\n   1.공유 폴더를 다운로드 받습니다.\n   2.CSV를 만듭니다.\n   3.공식 스프레드 시트를 xml로 변환합니다.");
+            var v = Console.ReadLine();
+            if(v == "1")
+            {
+                Credential2();
+                Download();
+            }
+            else if(v == "2")
+            {
+                XMLCombinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\Native\ModuleData\Languages");
+                XMLCombinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\SandBox\ModuleData\Languages");
+                XMLCombinder.ReadXMLDatas(@"C:\Users\shlif\OneDrive\Desktop\Github\MBKoreanFont\MBGoogleDrive\bin\Debug\KR");
+                XMLCombinder.SaveToCSV();
+            } 
+            else if(v == "3")
+            {
+                Credential2();
+                DownloadFromSheet(); 
+            }
         }
-
+        static void DownloadFromSheet()
+        {
+            XMLSheetDownloader dl = new XMLSheetDownloader();
+            dl.Download();
+        }
         static void Download()
         {
             XMLDownloader dl = new XMLDownloader();
