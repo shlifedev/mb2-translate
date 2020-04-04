@@ -55,7 +55,7 @@ namespace MBKoreanFont
             if (_gameUpTime >= 5)
             {
                 LoadFontFromModule();
-                _gameUpTime = 0;
+                _gameUpTime = float.NegativeInfinity;
             }
         } 
         public void LoadFontFromModule()
@@ -110,6 +110,7 @@ namespace MBKoreanFont
         /// <returns></returns>
         public static bool IsLegitPlayer()
         { 
+            return true;
             try
             {
                 if (legit == true) return true;
