@@ -16,9 +16,10 @@ public class XMLSheetDownloader
     static List<TranslateData> data = new List<TranslateData>(); 
     public void Download()
     {
+        System.IO.Directory.CreateDirectory("Output");
 
         // 생성할 XML 파일 경로와 이름, 인코딩 방식을 설정합니다. 
-        XmlTextWriter textWriter = new XmlTextWriter(@"example.xml", Encoding.UTF8);
+        XmlTextWriter textWriter = new XmlTextWriter(@"Output/MBKoreanFont.xml", Encoding.UTF8);
         // 들여쓰기 설정 
         textWriter.Formatting = System.Xml.Formatting.Indented;
         // 문서에 쓰기를 시작합니다. 
@@ -35,9 +36,9 @@ public class XMLSheetDownloader
         textWriter.WriteStartElement("strings");
         string strings ="";
         var csv = DriveManager.DownloadCSV("1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo");
-        System.IO.File.WriteAllText("downlodedSheet.csv", csv);
+        System.IO.File.WriteAllText("Output/MBKoreanFont.csv", csv);
         var splitnl = csv.Split('\n');
-        using (var reader = new StreamReader("downlodedSheet.csv"))
+        using (var reader = new StreamReader("Output/MBKoreanFont.csv"))
         {
             using (var td = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
@@ -49,7 +50,7 @@ public class XMLSheetDownloader
                     textWriter.WriteAttributeString("id", record.Id);
                     textWriter.WriteAttributeString("text",record.Translate);
                     textWriter.WriteEndElement();
-                }
+                }   
             }
 
         }  
