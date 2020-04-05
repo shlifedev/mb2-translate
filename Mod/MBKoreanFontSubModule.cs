@@ -18,14 +18,22 @@ using System.Linq;
 using HarmonyLib;
 using Module = TaleWorlds.MountAndBlade.Module;
 using System.Xml;
+using System.Runtime.InteropServices;
+using TaleWorlds.Engine.Screens;
+using TaleWorlds.InputSystem;
 
 namespace MBKoreanFont
 {
     /// <summary>
     /// Special Thanks : Akintos  
     /// </summary>
-    public class MBKoreanFontSubModule : MBSubModuleBase
+    public class MBKoreanFontSubModule : MBSubModuleBase 
     {
+        [DllImport("Rgl.dll", EntryPoint = "?toggle_imgui_console_visibility@rglCommand_line_manager@@QEAAXXZ", CallingConvention = CallingConvention.Cdecl)]
+        public static extern void toggle_imgui_console_visibility(UIntPtr x);
+
+        public static ModuleConfig config = new ModuleConfig();
+
         private static Dictionary<string, Dictionary<string, Font>> LocalizationMap;
         private static Dictionary<string, Font> DefaultFontMap;
         private static bool legit = false;
@@ -44,7 +52,7 @@ namespace MBKoreanFont
         /// <summary>
         /// Module Name.
         /// </summary>
-        public readonly string ModuleName = "MBKoreanFont";
+        public static string ModuleName = "MBKoreanFont";
         /// <summary>
         /// SinceUp Time.
         /// </summary>
@@ -53,15 +61,28 @@ namespace MBKoreanFont
         public static bool FontLoaded { get; set; }
         public static Font font;
 
+        protected override void OnBeforeInitialModuleScreenSetAsRoot()
+        {
+            base.OnBeforeInitialModuleScreenSetAsRoot();
+          
+            InformationManager.DisplayMessage(new InformationMessage("Loaded DeveloperConsole. Press CTRL and ~ to enable it.", Color.FromUint(4282569842U)));
+        }
+
+ 
         /* Load For Late Loaded FontMap Datas. */
         protected override void OnApplicationTick(float dt)
         {
             _gameUpTime += dt;
-            if (_gameUpTime >= 7)
+            if (_gameUpTime >= 6)
             {
                 LoadFontFromModule();
                 _gameUpTime = float.NegativeInfinity;
             }
+
+            ScreenBase topScreen = ScreenManager.TopScreen;
+            if (topScreen == null || !topScreen.DebugInput.IsControlDown() || !topScreen.DebugInput.IsKeyPressed(InputKey.Tilde))
+                return;
+            toggle_imgui_console_visibility(new UIntPtr(1U));
         }
         public void LoadFontFromModule()
         {
@@ -152,30 +173,16 @@ namespace MBKoreanFont
         public void AddStartMenu(string name, System.Action callback)
         {
             Module.CurrentModule.AddInitialStateOption(new InitialStateOption(name,
-  new TextObject(name, null),
-  9990,
-  () =>
-  {
-      callback();
-  },
-  false));
+    new TextObject(name, null),
+    9990,
+    () =>
+    {
+        callback();
+    },
+    false));
         }
 
-        public void LoadLocalizationValues()
-        {
-
-            try
-            {
-                var _defaultFontMap = typeof (LocalizedTextManager).GetField("_gameTextDictionary", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null); 
-                _defaultFontMap.GetType().GetMethod("Clear").Invoke(_defaultFontMap, null); 
-                TaleWorlds.Localization.LocalizedTextManager.LoadLocalizationXmls();
-
-            }
-            catch (Exception e)
-            {
-                InformationManager.ShowInquiry(new InquiryData("Except!!", e.Message, true, false, "ok" , null, null, null, ""));
-            }
-        }
+  
 
         protected override void OnSubModuleLoad()
         {
@@ -192,15 +199,13 @@ namespace MBKoreanFont
                     {
                         InformationManager.ShowInquiry(new InquiryData("Korean Mod Patch", "Do You Want Download Lastest Korean Data?", true, true, "Yes", "No", () =>
                         {
-                            CredentialManager.Credential();
-                            XMLSheetDownloader dl = new XMLSheetDownloader();
-                            dl.DownloadFromSheet($"../../Modules/{ModuleName}/ModuleData/Languages/KR/LatestTranslate.xml");
-                            LoadLocalizationValues();
+                            MBKoreanFont.Translate.TranslateUtility.DownloadLatestTranslate();
+                            MBKoreanFont.Translate.TranslateUtility.ReloadTranslate();
                         }, () =>
                         {
 
                         }, ""));
-                        InformationManager.ShowInquiry(new InquiryData("Successfully!!", "", true, false, "Thank", null, null, null, "")); 
+                        InformationManager.ShowInquiry(new InquiryData("Successfully!!", "", true, false, "Thank", null, null, null, ""));
                     }
                     catch (Exception e)
                     {
