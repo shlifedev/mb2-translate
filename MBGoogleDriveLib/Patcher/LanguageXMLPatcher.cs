@@ -17,8 +17,9 @@ using System.Threading.Tasks;
 
             Logger.Log("배너로드 경로에서 XML 데이터 파일을 읽어옵니다.");
             combinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\Native\ModuleData\Languages");
-            combinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\SandBox\ModuleData\Languages");
-            XMLSheetDownloader dl = new XMLSheetDownloader();
+        combinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\SandBox\ModuleData\Languages");
+        combinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\SandBoxCore\ModuleData\Languages");
+        XMLSheetDownloader dl = new XMLSheetDownloader();
 
             Logger.Log("구글드라이브에서 번역본 XML 파일을 읽어옵니다.");
             var xmlSavePath = "PatchLang/LatestSheet.xml";
