@@ -186,7 +186,7 @@ namespace MBKoreanFont
             AddStartMenu("Korean Load", LoadFontFromModule);
             if (FontLoaded)
             {
-                AddStartMenu("한글-최신패치", () =>
+                AddStartMenu("최신번역다운", () =>
                 {
                     try
                     {
@@ -200,12 +200,11 @@ namespace MBKoreanFont
                         {
 
                         }, ""));
-                        InformationManager.ShowInquiry(new InquiryData("Successfully!!", "", true, false, "Thank", null, null, null, ""));
-
+                        InformationManager.ShowInquiry(new InquiryData("Successfully!!", "", true, false, "Thank", null, null, null, "")); 
                     }
                     catch (Exception e)
                     {
-                        InformationManager.ShowInquiry(new InquiryData("Patch failed", "Patch download failed. => " + e.Message, true, false, "Oh, I'm sad.", null, null, null, ""));
+                        InformationManager.ShowInquiry(new InquiryData("Patch failed", "Patch download failed. => " + e.Message, true, false, "sorry..", null, null, null, ""));
                     }
 
                 });
