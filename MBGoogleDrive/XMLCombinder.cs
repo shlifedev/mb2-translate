@@ -4,28 +4,31 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml; 
-public static class XMLCombinder
+using System.Xml;
+public class XMLCombinder
 {
-    static Dictionary<string, TranslateData> dataMap = new Dictionary<string, TranslateData>();
+    Dictionary<string, TranslateData> dataMap = new Dictionary<string, TranslateData>();
 
-    public static void SaveToCSV()
+    public void ExportReadDataToCSV(string savePath )
     {
+        System.IO.FileInfo fi = new System.IO.FileInfo(savePath);
+        System.IO.Directory.CreateDirectory(fi.Directory.FullName); 
         string v = "Id\tOriginal\tTranslate\tFilename\tModule\n";
         foreach (var data in dataMap)
         {
             v += $"{data.Key}\t{data.Value.Original}\t{data.Value.Translate}\t{data.Value.Filename}\t{data.Value.Module}\n";
-         
+
         }
-        System.IO.File.WriteAllText("XMLTest.txt", v);
+        System.IO.File.WriteAllText(savePath, v);
+        dataMap.Clear();
     }
     /// <summary>
     /// 경로에서 xml을 읽어서 dataMap에 저장.
     /// </summary>
     /// <param name="xmlPath"></param>
     /// <param name="langCode"></param>
-    public static void ReadXMLDatas(string xmlPath)
-    {
+    public void ReadXMLDatas(string xmlPath)
+    { 
         System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(xmlPath);
         var files = di.GetFiles();
         foreach (var data in files)
@@ -41,7 +44,7 @@ public static class XMLCombinder
                 {
                     if (reader.Name == "tag")
                     {
-                        lang = reader["language"]; 
+                        lang = reader["language"];
                     }
                     if (reader.Name == "string")
                     {

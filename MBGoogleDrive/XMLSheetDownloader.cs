@@ -38,13 +38,17 @@ public class XMLSheetDownloader
         }
     }
     public void DownloadFromSheet(string xmlPath = null)
-    { 
-        System.IO.Directory.CreateDirectory(OutputPath);
-
+    {
+ 
         string xmlSavePath = "";
         if(xmlPath == null)
             xmlSavePath = XmlSavePath;
+        else
+        {
+            xmlSavePath = xmlPath;
+        }
 
+        System.IO.Directory.CreateDirectory(new FileInfo(xmlPath).Directory.FullName);
 
         // 생성할 XML 파일 경로와 이름, 인코딩 방식을 설정합니다. 
         XmlTextWriter textWriter = new XmlTextWriter(xmlSavePath, Encoding.UTF8);

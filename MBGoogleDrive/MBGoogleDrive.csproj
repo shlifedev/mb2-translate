@@ -88,6 +88,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Logger.cs" />
     <Compile Include="Setting.cs" />
     <Compile Include="TranslateData.cs" />
     <Compile Include="XMLCombinder.cs" />

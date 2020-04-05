@@ -31,7 +31,7 @@ namespace GoogleDrive
             DriveManager.Init(service);
         }
         public static void CredentialBySecretKey()
-        { 
+        {
             UserCredential credential;
             using (var stream =
                 new FileStream("secret.json", FileMode.Open, FileAccess.Read))
@@ -60,39 +60,57 @@ namespace GoogleDrive
     {
         static string[] Scopes = { DriveService.Scope.DriveReadonly };
         static string ApplicationName = "Drive API .NET Quickstart";
-        public static Setting setting = new Setting();
- 
- 
+        public static Setting setting = new Setting(); 
+
         static void Main(string[] args)
-        { 
+        {
             Console.WriteLine("\t 실행 할 기능 선택\n   1.공유 폴더를 다운로드 받습니다.\n   2.CSV를 만듭니다.\n   3.공식 스프레드 시트를 xml로 변환합니다.");
             var v = Console.ReadLine();
-            if(v == "1")
-            {
-                CredentialManager.CredentialBySecretKey();
+            if (v == "1")
+            { 
                 Download();
             }
-            else if(v == "2")
+            else if (v == "2")
             {
-                XMLCombinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\Native\ModuleData\Languages");
-                XMLCombinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\SandBox\ModuleData\Languages");
-                XMLCombinder.ReadXMLDatas(@"C:\Users\shlif\OneDrive\Desktop\Github\MBKoreanFont\MBGoogleDrive\bin\Debug\Downloaded");
-                XMLCombinder.SaveToCSV();
-            } 
-            else if(v == "3")
-            {
-                CredentialManager.Credential();
-                DownloadFromSheet(); 
+                PatchLanguageData();
+            }
+            else if (v == "3")
+            { 
+                DownloadFromSheet();
             }
         }
-      
+        static void PatchLanguageData()
+        {
+            Console.Clear();
+
+            Logger.Log("새로운 패치파일을 만듭니다.");
+            CredentialManager.Credential();
+            XMLCombinder combinder = new XMLCombinder();
+
+            Logger.Log("배너로드 경로에서 XML 데이터 파일을 읽어옵니다.");
+            combinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\Native\ModuleData\Languages");
+            combinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\SandBox\ModuleData\Languages");
+            XMLSheetDownloader dl = new XMLSheetDownloader();
+
+            Logger.Log("구글드라이브에서 번역본 XML 파일을 읽어옵니다.");
+            var xmlSavePath = "PatchLang/LatestSheet.xml";
+            FileInfo fi = new FileInfo(xmlSavePath);
+            var dirName = fi.Directory.FullName;
+            dl.DownloadFromSheet(xmlSavePath);
+            combinder.ReadXMLDatas(dirName); 
+
+            Logger.Log("번역본 데이터와 로컬 스트링을 취합중입니다.");
+            combinder.ExportReadDataToCSV("PatchLang/PatchedLatestSheet.csv"); 
+        }
         static void DownloadFromSheet()
         {
+            CredentialManager.Credential();
             XMLSheetDownloader dl = new XMLSheetDownloader();
             dl.DownloadFromSheet();
         }
         static void Download()
         {
+            CredentialManager.Credential();
             XMLDownloader dl = new XMLDownloader();
             dl.Init();
             dl.DownloadAll();
