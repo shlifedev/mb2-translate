@@ -14,7 +14,7 @@ namespace MBKoreanFont.Translate
 
         public static void DownloadLatestTranslate()
         {
-            CredentialManager.Credential();
+            CredentialManager.CredentialDriveService();
             XMLSheetDownloader dl = new XMLSheetDownloader();
             dl.DownloadFromSheet($"../../Modules/{MBKoreanFontSubModule.ModuleName}/ModuleData/Languages/KR/LatestTranslate.xml");
         }

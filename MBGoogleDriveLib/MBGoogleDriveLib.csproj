@@ -52,6 +52,9 @@
     <Reference Include="Google.Apis.PlatformServices, Version=1.45.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.45.0\lib\net45\Google.Apis.PlatformServices.dll</HintPath>
     </Reference>
+    <Reference Include="Google.Apis.Sheets.v4, Version=1.45.0.1911, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
+      <HintPath>..\packages\Google.Apis.Sheets.v4.1.45.0.1911\lib\net45\Google.Apis.Sheets.v4.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.Bcl.AsyncInterfaces, Version=1.0.0.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.Bcl.AsyncInterfaces.1.1.0\lib\net461\Microsoft.Bcl.AsyncInterfaces.dll</HintPath>
     </Reference>
@@ -74,12 +77,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\SheetManager.cs" />
     <Compile Include="Core\DriveManager.cs" />
     <Compile Include="Core\TranslateData.cs" />
     <Compile Include="Core\XMLCombinder.cs" />
     <Compile Include="Core\XMLDownloader.cs" />
     <Compile Include="Core\XMLSheetDownloader.cs" />
-    <Compile Include="CredentialManager.cs" />
+    <Compile Include="Core\CredentialManager.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Patcher\LanguageXMLPatcher.cs" />
     <Compile Include="Patcher\LanguageXmlPatcherConfig.cs" />

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
             Console.Clear();
 
             Logger.Log("새로운 패치파일을 만듭니다.");
-            CredentialManager.Credential();
+            CredentialManager.CredentialDriveService();
             XMLCombinder combinder = new XMLCombinder();
 
             Logger.Log("배너로드 경로에서 XML 데이터 파일을 읽어옵니다.");

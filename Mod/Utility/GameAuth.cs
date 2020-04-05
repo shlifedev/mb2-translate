@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MBKoreanFont.Utility
+namespace MBKoreanFont.Utility  
 {
     public class GameAuth
     {

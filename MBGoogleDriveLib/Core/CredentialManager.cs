@@ -14,24 +14,44 @@ using System.Xml;
 
 public static class CredentialManager
 {
-    static string[] Scopes = { DriveService.Scope.DriveReadonly };
+ 
     static string ApplicationName = "Drive API .NET Quickstart";
-    public static Google.Apis.Drive.v3.DriveService Service;
-    public static void Credential()
+    public static Google.Apis.Drive.v3.DriveService DriveService;
+    public static Google.Apis.Sheets.v4.SheetsService SheetService;
+
+    public static void CredentialSheetService()
     {
-        if (Service == null)
+        if (SheetService == null)
+        {
+            Google.Apis.Services.BaseClientService.Initializer bcs = new Google.Apis.Services.BaseClientService.Initializer();
+            bcs.ApiKey = "AIzaSyA71-yjK1IVUWEEgy5X76uNONpLbe02rDs";
+            bcs.ApplicationName = "MBTranslate";  
+            Google.Apis.Sheets.v4.SheetsService service = new Google.Apis.Sheets.v4.SheetsService(bcs);
+            SheetService = service;
+            SheetManager.Init(service);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("구글 시트 인증에 성공했습니다.");
+            Console.ForegroundColor = ConsoleColor.White;
+        }
+    }
+    public static void CredentialDriveService()
+    {
+        if (DriveService == null)
         {
             Google.Apis.Services.BaseClientService.Initializer bcs = new Google.Apis.Services.BaseClientService.Initializer();
             bcs.ApiKey = "AIzaSyA71-yjK1IVUWEEgy5X76uNONpLbe02rDs";
             bcs.ApplicationName = "MBTranslate";
             Google.Apis.Drive.v3.DriveService service = new Google.Apis.Drive.v3.DriveService(bcs);
-            Service = service;
+            DriveService = service;
             DriveManager.Init(service);
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine("구글 드라이브 인증에 성공했습니다.");
+            Console.ForegroundColor = ConsoleColor.White;
         }
     }
-    public static void CredentialBySecretKey()
+    public static void CredentialDriveSeriveByToken()
     {
-        if (Service == null)
+        if (DriveService == null)
         {
             UserCredential credential;
             using (var stream =
@@ -40,7 +60,7 @@ public static class CredentialManager
                 string credPath = "token.json";
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
                     GoogleClientSecrets.Load(stream).Secrets,
-                    Scopes,
+                    new string[] { DriveService.Scope.DriveReadonly },
                     "user",
                     CancellationToken.None,
                     new FileDataStore(credPath, true)).Result;
@@ -53,7 +73,7 @@ public static class CredentialManager
                 HttpClientInitializer = credential,
                 ApplicationName = ApplicationName,
             });
-            Service = service;
+            DriveService = service;
             DriveManager.Init(service);
         }
     }
