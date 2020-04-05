@@ -65,10 +65,8 @@ public class XMLSheetDownloader
         textWriter.WriteAttributeString("language", "한국어");
         textWriter.WriteEndElement();
         textWriter.WriteEndElement();
-        textWriter.WriteStartElement("strings");
-        string strings ="";
-        var csv = DriveManager.DownloadCSV("1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo");
-        System.IO.File.WriteAllText(CSVSavePath, csv);
+        textWriter.WriteStartElement("strings"); 
+        var csv = DriveManager.DownloadCSV("1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo"); 
         var splitnl = csv.Split('\n');
         using (var reader = new StreamReader(CSVSavePath))
         {

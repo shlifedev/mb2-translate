@@ -39,6 +39,7 @@ namespace GoogleDrive
                 {
                     DownloadFromSheet();
                 }
+                Console.Clear();
             }
         }
         static void PatchLanguageData()
@@ -49,7 +50,7 @@ namespace GoogleDrive
         {
             CredentialManager.Credential();
             XMLSheetDownloader dl = new XMLSheetDownloader();
-            dl.DownloadFromSheet();
+            dl.DownloadFromSheet($"Downloaded/LatestTranslate.xml");
         }
         static void Download()
         {
