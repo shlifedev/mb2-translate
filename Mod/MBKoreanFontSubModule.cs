@@ -16,6 +16,7 @@ using TaleWorlds.Core;
 using System;
 using System.Linq;
 using HarmonyLib;
+using Module = TaleWorlds.MountAndBlade.Module;
 
 namespace MBKoreanFont
 {
@@ -24,7 +25,7 @@ namespace MBKoreanFont
     /// </summary>
     public class MBKoreanFontSubModule : MBSubModuleBase
     {
-        private static bool legit = false; 
+        private static bool legit = false;
         /// <summary>
         /// Your Font File Name. (xxx.png, xxx.fnt)
         /// </summary>
@@ -46,6 +47,7 @@ namespace MBKoreanFont
         /// </summary>
         private float _gameUpTime = 0;
 
+        public static bool FontLoaded { get; set; }
         public static Font font;
 
         /* Load For Late Loaded FontMap Datas. */
@@ -57,7 +59,7 @@ namespace MBKoreanFont
                 LoadFontFromModule();
                 _gameUpTime = float.NegativeInfinity;
             }
-        } 
+        }
         public void LoadFontFromModule()
         {
             if (IsLegitPlayer())
@@ -98,24 +100,26 @@ namespace MBKoreanFont
 
                 /* apply */
                 UIResourceManager.FontFactory.DefaultFont = font;
+                FontLoaded = true;
             }
             else
             {
                 InformationManager.DisplayMessage(new InformationMessage("what the bok dol bok d  o  l    d    . . .           ."));
             }
-        }  
+        }
         /// <summary>
         /// You Bokdol..?
         /// </summary>
         /// <returns></returns>
         public static bool IsLegitPlayer()
-        { 
+        {
             return true;
             try
             {
                 if (legit == true) return true;
                 var value = Microsoft.Win32.Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null);
-                if (string.IsNullOrEmpty(value.ToString())) {
+                if (string.IsNullOrEmpty(value.ToString()))
+                {
                     return false;
                 }
                 var ret =  value + @"\steamapps\";
@@ -130,19 +134,38 @@ namespace MBKoreanFont
             catch (Exception e)
             {
                 return legit;
-            } 
+            }
             return legit;
+        }
+
+
+
+        public void AddSelfLoadMenu()
+        {
+            Module.CurrentModule.AddInitialStateOption(new InitialStateOption("Message",
+            new TextObject("Korean Load", null),
+            9990,
+            () =>
+            {
+                LoadFontFromModule();
+
+            },
+            false));
         }
 
         protected override void OnSubModuleLoad()
         {
-            base.OnSubModuleLoad(); 
+            base.OnSubModuleLoad();
             LoadFontFromModule();
             Harmony harmony = new Harmony("de.schplorg.bannerfix");
-            harmony.PatchAll(); 
+            harmony.PatchAll();
+            AddSelfLoadMenu();
+
         }
-         
-    } 
+
+    }
+
 }
 
- 
+
+

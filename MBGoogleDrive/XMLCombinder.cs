@@ -4,20 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Xml;
-public class TranslateData
-{
-    [Name("Id")]
-    public string Id { get; set; }
-    [Name("Original")]
-    public string Original { get; set; }
-    [Name("Translate")]
-    public string Translate { get; set; }
-    [Name("Filename")]
-    public string Filename { get; set; }
-    [Name("Module")]
-    public string Module { get; set; }
-}
+using System.Xml; 
 public static class XMLCombinder
 {
     static Dictionary<string, TranslateData> dataMap = new Dictionary<string, TranslateData>();
@@ -28,11 +15,10 @@ public static class XMLCombinder
         foreach (var data in dataMap)
         {
             v += $"{data.Key}\t{data.Value.Original}\t{data.Value.Translate}\t{data.Value.Filename}\t{data.Value.Module}\n";
+         
         }
         System.IO.File.WriteAllText("XMLTest.txt", v);
     }
-
-
     /// <summary>
     /// 경로에서 xml을 읽어서 dataMap에 저장.
     /// </summary>
@@ -55,8 +41,7 @@ public static class XMLCombinder
                 {
                     if (reader.Name == "tag")
                     {
-                        lang = reader["language"];
-
+                        lang = reader["language"]; 
                     }
                     if (reader.Name == "string")
                     {

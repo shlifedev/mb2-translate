@@ -337,5 +337,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MBGoogleDrive\MBGoogleDrive.csproj">
+      <Project>{f2fb7f40-5724-444a-947c-d096f495496b}</Project>
+      <Name>MBGoogleDrive</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

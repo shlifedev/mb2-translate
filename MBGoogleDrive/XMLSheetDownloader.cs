@@ -14,12 +14,40 @@ using System.Globalization;
 public class XMLSheetDownloader
 {
     static List<TranslateData> data = new List<TranslateData>(); 
-    public void Download()
+    static string OutputPath
     {
-        System.IO.Directory.CreateDirectory("Output");
+        get
+        {
+            return "Downloaded/";
+        }
+    }
+
+    static string CSVSavePath
+    {
+        get
+        {
+            return OutputPath + "sheet_downloaded.csv";
+        } 
+    }
+
+    static string XmlSavePath
+    {
+        get
+        {
+            return OutputPath + "MBKoreanFont.xml";
+        }
+    }
+    public void DownloadFromSheet(string xmlPath = null)
+    { 
+        System.IO.Directory.CreateDirectory(OutputPath);
+
+        string xmlSavePath = "";
+        if(xmlPath == null)
+            xmlSavePath = XmlSavePath;
+
 
         // 생성할 XML 파일 경로와 이름, 인코딩 방식을 설정합니다. 
-        XmlTextWriter textWriter = new XmlTextWriter(@"Output/MBKoreanFont.xml", Encoding.UTF8);
+        XmlTextWriter textWriter = new XmlTextWriter(xmlSavePath, Encoding.UTF8);
         // 들여쓰기 설정 
         textWriter.Formatting = System.Xml.Formatting.Indented;
         // 문서에 쓰기를 시작합니다. 
@@ -36,9 +64,9 @@ public class XMLSheetDownloader
         textWriter.WriteStartElement("strings");
         string strings ="";
         var csv = DriveManager.DownloadCSV("1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo");
-        System.IO.File.WriteAllText("Output/MBKoreanFont.csv", csv);
+        System.IO.File.WriteAllText(CSVSavePath, csv);
         var splitnl = csv.Split('\n');
-        using (var reader = new StreamReader("Output/MBKoreanFont.csv"))
+        using (var reader = new StreamReader(CSVSavePath))
         {
             using (var td = new CsvReader(reader, CultureInfo.InvariantCulture))
             {
@@ -48,7 +76,7 @@ public class XMLSheetDownloader
                 {
                     textWriter.WriteStartElement("string");
                     textWriter.WriteAttributeString("id", record.Id);
-                    textWriter.WriteAttributeString("text",record.Translate);
+                    textWriter.WriteAttributeString("text", record.Translate); 
                     textWriter.WriteEndElement();
                 }   
             }
@@ -59,36 +87,4 @@ public class XMLSheetDownloader
         textWriter.WriteEndDocument(); 
         textWriter.Close(); 
     }
-    //    public void Download()
-    //    {
-    //        string strings ="";
-    //        var csv = DriveManager.DownloadCSV("1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo");
-    //        System.IO.File.WriteAllText("downlodedSheet.csv",csv);
-    //        var splitnl = csv.Split('\n');
-    //        using (var reader = new StreamReader("downlodedSheet.csv"))
-    //        { 
-    //            using (var td = new CsvReader(reader, CultureInfo.InvariantCulture))
-    //            {
-    //                var records = td.GetRecords<TranslateData>();
-    //                foreach (var record in records)
-    //                {
-    //                    var replace =record.Translate;
-    //                    strings += $"<string id= \"{record.Id}\" text=\"{replace}\"/>\n";
-    //                }
-    //            }
-
-    //        }
-
-    //        string xml = $@"<?xml version=""1.0"" encoding=""utf-8""?>
-    //<base xmlns:xsi=""http://www.w3.org/2001/XMLSchema-instance"" xmlns:xsd=""http://www.w3.org/2001/XMLSchema"" type=""string"">
-    //<tags>
-    //<tag language=""한국어""/>
-    //</tags>
-    //<strings>
-    //{strings}
-    //</strings>
-    //</base>
-    //"; 
-    //        System.IO.File.WriteAllText("std_translatedData.xml",xml);
-    //    }
 }
