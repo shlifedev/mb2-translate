@@ -2,8 +2,7 @@
 using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
-using Google.Apis.Util.Store;
-using MBGoogleDrive;
+using Google.Apis.Util.Store; 
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -18,23 +17,28 @@ namespace GoogleDrive
     class Program
     {
         static string[] Scopes = { DriveService.Scope.DriveReadonly };
-        static string ApplicationName = "Drive API .NET Quickstart";
-        public static Setting setting = new Setting(); 
+        static string ApplicationName = "Drive API .NET Quickstart"; 
         static void Main(string[] args)
         {
-            Console.WriteLine("\t 실행 할 기능 선택\n   1.공유 폴더를 다운로드 받습니다.\n   2.CSV를 만듭니다.\n   3.공식 스프레드 시트를 xml로 변환합니다.");
-            var v = Console.ReadLine();
-            if (v == "1")
+            while (true)
             {
-                Download();
-            }
-            else if (v == "2")
-            {
-                PatchLanguageData();
-            }
-            else if (v == "3")
-            {
-                DownloadFromSheet();
+                Console.ForegroundColor = ConsoleColor.Green;
+                Console.WriteLine("\t 최신 XML 다운로더입니다. 제작:shlifedev@gmail.com | 마공카 햄스터 에비츄");
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine("최신 XML 다운로더입니다.");
+                var v = Console.ReadLine();
+                if (v == "1")
+                {
+                    Download();
+                }
+                else if (v == "2")
+                {
+                    PatchLanguageData();
+                }
+                else if (v == "3")
+                {
+                    DownloadFromSheet();
+                }
             }
         }
         static void PatchLanguageData()

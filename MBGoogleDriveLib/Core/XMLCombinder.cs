@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 using System.Xml;
 public class XMLCombinder
 {
+    /// <summary>
+    /// 
+    /// </summary>
     Dictionary<string, TranslateData> dataMap = new Dictionary<string, TranslateData>();
 
     public void ExportReadDataToCSV(string savePath )
@@ -22,6 +25,20 @@ public class XMLCombinder
         System.IO.File.WriteAllText(savePath, v);
         dataMap.Clear();
     }
+     
+
+    private string TempModuleNameChecker(string diFullname)
+    {
+        string modName = "";
+        if (diFullname.Contains(@"Modules\SandBox"))
+            modName = "SandBox";
+        if (diFullname.Contains(@"Modules\SandBoxCore"))
+            modName = "SandBoxCore";
+        else if (diFullname.Contains(@"Modules\Native")) 
+            modName = "Native"; 
+        else modName ="Unknown";
+        return modName;
+    }
     /// <summary>
     /// 경로에서 xml을 읽어서 dataMap에 저장.
     /// </summary>
@@ -30,7 +47,7 @@ public class XMLCombinder
     public void ReadXMLDatas(string xmlPath)
     { 
         System.IO.DirectoryInfo di = new System.IO.DirectoryInfo(xmlPath);
-        var files = di.GetFiles();
+        var files = di.GetFiles("*.xml");
         foreach (var data in files)
         {
             string lang = "";
@@ -48,33 +65,25 @@ public class XMLCombinder
                     }
                     if (reader.Name == "string")
                     {
-                        var id = reader["id"];
+                        var id = reader["id"]; 
+                        //기존 번역이 불러와진 상태.
                         if (dataMap.ContainsKey(id))
                             targetTranData = dataMap[id];
-                        else
+                        else //기존 번역이 불러와지지 않은 상태
                         {
+                            
+                            //기존 번역에 대한 번역 정보 작성.
                             targetTranData = new TranslateData();
                             targetTranData.Id = id;
-                            targetTranData.Filename = data.Name;
-                            if (di.FullName.Contains(@"Modules\SandBox"))
-                            {
-                                modName = "SandBox";
-                            }
-                            else if (di.FullName.Contains(@"Modules\Native"))
-                            {
-                                modName = "Native";
-                            }
-                            targetTranData.Module = modName;
+                            targetTranData.Filename = data.Name; 
+                            targetTranData.Module = TempModuleNameChecker(di.FullName);
                             dataMap.Add(id, targetTranData);
                         }
-                        if (lang == "한국어")
-                        {
-                            targetTranData.Translate = reader["text"];
-                        }
-                        if (lang == "English")
-                        {
-                            targetTranData.Original = reader["text"];
-                        }
+                        //언어 파악
+                        if (lang == "한국어") 
+                            targetTranData.Translate = reader["text"]; 
+                        if (lang == "English") 
+                            targetTranData.Original = reader["text"]; 
                     }
                 }
             }

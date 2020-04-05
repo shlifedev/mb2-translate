@@ -4,9 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
-namespace MBGoogleDrive
-{
+ 
     public static class LanguageXMLPatcher
     {
         public static void RunPatch()
@@ -33,5 +31,4 @@ namespace MBGoogleDrive
             combinder.ExportReadDataToCSV("PatchLang/PatchedLatestSheet.csv");
         }
 
-    }
-}
+    } 
