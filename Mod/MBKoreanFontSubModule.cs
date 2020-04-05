@@ -17,6 +17,7 @@ using System;
 using System.Linq;
 using HarmonyLib;
 using Module = TaleWorlds.MountAndBlade.Module;
+using System.Xml;
 
 namespace MBKoreanFont
 {
@@ -25,6 +26,8 @@ namespace MBKoreanFont
     /// </summary>
     public class MBKoreanFontSubModule : MBSubModuleBase
     {
+        private static Dictionary<string, Dictionary<string, Font>> LocalizationMap;
+        private static Dictionary<string, Font> DefaultFontMap;
         private static bool legit = false;
         /// <summary>
         /// Your Font File Name. (xxx.png, xxx.fnt)
@@ -54,7 +57,7 @@ namespace MBKoreanFont
         protected override void OnApplicationTick(float dt)
         {
             _gameUpTime += dt;
-            if (_gameUpTime >= 5)
+            if (_gameUpTime >= 7)
             {
                 LoadFontFromModule();
                 _gameUpTime = float.NegativeInfinity;
@@ -94,6 +97,15 @@ namespace MBKoreanFont
                 as Dictionary<string, Dictionary<string, Font>>;
                 _bitmapFont[CoverFontName] = font;
 
+
+
+                Dictionary<string, Font> _defaultFontMap =
+                typeof (FontFactory).GetField("_fontLocalizationMap", BindingFlags.Instance | BindingFlags.NonPublic)
+                .GetValue((object) UIResourceManager.FontFactory) as Dictionary<string, Font>;
+
+
+
+                LocalizationMap = _localizationMap;
                 /* cover font data. */
                 foreach (string index in new List<string>((IEnumerable<string>)_localizationMap[XMLKey].Keys))
                     _localizationMap[XMLKey][index] = font;
@@ -137,20 +149,32 @@ namespace MBKoreanFont
             }
             return legit;
         }
-
-
-
-        public void AddSelfLoadMenu()
+        public void AddStartMenu(string name, System.Action callback)
         {
-            Module.CurrentModule.AddInitialStateOption(new InitialStateOption("Message",
-            new TextObject("Korean Load", null),
-            9990,
-            () =>
-            {
-                LoadFontFromModule();
+            Module.CurrentModule.AddInitialStateOption(new InitialStateOption(name,
+  new TextObject(name, null),
+  9990,
+  () =>
+  {
+      callback();
+  },
+  false));
+        }
 
-            },
-            false));
+        public void LoadLocalizationValues()
+        {
+
+            try
+            {
+                var _defaultFontMap = typeof (LocalizedTextManager).GetField("_gameTextDictionary", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null); 
+                _defaultFontMap.GetType().GetMethod("Clear").Invoke(_defaultFontMap, null); 
+                TaleWorlds.Localization.LocalizedTextManager.LoadLocalizationXmls();
+
+            }
+            catch (Exception e)
+            {
+                InformationManager.ShowInquiry(new InquiryData("Except!!", e.Message, true, false, "ok" , null, null, null, ""));
+            }
         }
 
         protected override void OnSubModuleLoad()
@@ -159,7 +183,33 @@ namespace MBKoreanFont
             LoadFontFromModule();
             Harmony harmony = new Harmony("de.schplorg.bannerfix");
             harmony.PatchAll();
-            AddSelfLoadMenu();
+            AddStartMenu("Korean Load", LoadFontFromModule);
+            if (FontLoaded)
+            {
+                AddStartMenu("한글-최신패치", () =>
+                {
+                    try
+                    {
+                        InformationManager.ShowInquiry(new InquiryData("Korean Mod Patch", "Do You Want Download Lastest Korean Data?", true, true, "Yes", "No", () =>
+                        {
+                            CredentialManager.Credential();
+                            XMLSheetDownloader dl = new XMLSheetDownloader();
+                            dl.DownloadFromSheet($"../../Modules/{ModuleName}/ModuleData/Languages/KR/LatestTranslate.xml");
+                            LoadLocalizationValues();
+                        }, () =>
+                        {
+
+                        }, ""));
+                        InformationManager.ShowInquiry(new InquiryData("Successfully!!", "", true, false, "Thank", null, null, null, ""));
+
+                    }
+                    catch (Exception e)
+                    {
+                        InformationManager.ShowInquiry(new InquiryData("Patch failed", "Patch download failed. => " + e.Message, true, false, "Oh, I'm sad.", null, null, null, ""));
+                    }
+
+                });
+            }
 
         }
 

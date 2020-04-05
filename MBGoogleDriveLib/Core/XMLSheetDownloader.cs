@@ -46,10 +46,9 @@ public class XMLSheetDownloader
         else
         {
             xmlSavePath = xmlPath;
-        }
-
+        } 
         System.IO.Directory.CreateDirectory(new FileInfo(xmlPath).Directory.FullName);
-
+        System.IO.Directory.CreateDirectory(new FileInfo(CSVSavePath).Directory.FullName); 
         // 생성할 XML 파일 경로와 이름, 인코딩 방식을 설정합니다. 
         XmlTextWriter textWriter = new XmlTextWriter(xmlSavePath, Encoding.UTF8);
         // 들여쓰기 설정 
@@ -67,6 +66,7 @@ public class XMLSheetDownloader
         textWriter.WriteEndElement();
         textWriter.WriteStartElement("strings"); 
         var csv = DriveManager.DownloadCSV("1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo"); 
+        System.IO.File.WriteAllText(CSVSavePath, csv);
         var splitnl = csv.Split('\n');
         using (var reader = new StreamReader(CSVSavePath))
         {
