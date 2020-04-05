@@ -88,19 +88,25 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Patcher\LanguageXMLPatcher.cs" />
     <Compile Include="Logger.cs" />
+    <Compile Include="Patcher\LanguageXmlPatcherConfig.cs" />
     <Compile Include="Setting.cs" />
-    <Compile Include="TranslateData.cs" />
-    <Compile Include="XMLCombinder.cs" />
-    <Compile Include="XMLSheetDownloader.cs" />
-    <Compile Include="XMLDownloader.cs" />
-    <Compile Include="DriveManager.cs" />
+    <Compile Include="Core\TranslateData.cs" />
+    <Compile Include="Core\XMLCombinder.cs" />
+    <Compile Include="Core\XMLSheetDownloader.cs" />
+    <Compile Include="Core\XMLDownloader.cs" />
+    <Compile Include="Core\DriveManager.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="SheetDownloader\" />
+    <Folder Include="XmlDocToXmlDownloader\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
