@@ -26,6 +26,7 @@ public static class SheetManager
 
     public static string GetVersion()
     {
+        CredentialManager.CredentialSheetServiceByToken();
         String spreadsheetId = "1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo";
         String range = "엑셀정보!B7";
 

@@ -22,6 +22,10 @@ using System.Runtime.InteropServices;
 using TaleWorlds.Engine.Screens;
 using TaleWorlds.InputSystem;
 
+/// <summary>
+/// 모드파일/소스코드 무단수정 배포 금지합니다.
+/// Writer : shlifedev@gmail.com 
+/// </summary>
 namespace MBKoreanFont
 {
     /// <summary>
@@ -63,9 +67,8 @@ namespace MBKoreanFont
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
-            base.OnBeforeInitialModuleScreenSetAsRoot();
-          
-            InformationManager.DisplayMessage(new InformationMessage("Loaded DeveloperConsole. Press CTRL and ~ to enable it.", Color.FromUint(4282569842U)));
+            base.OnBeforeInitialModuleScreenSetAsRoot(); 
+            InformationManager.DisplayMessage(new InformationMessage("[MBKoreanFont] Develop Console :  CTRL + ` ", Color.FromUint(4282569842U)));
         }
 
  
@@ -137,7 +140,7 @@ namespace MBKoreanFont
             }
             else
             {
-                InformationManager.DisplayMessage(new InformationMessage("what the bok dol bok d  o  l    d    . . .           ."));
+                InformationManager.ShowInquiry(new  InquiryData("Module Load Faile!", "failed load module.", true, false, ":(", null, null, null));
             }
         }
         /// <summary>

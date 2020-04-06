@@ -4,7 +4,10 @@ using System;
 using System.Reflection;
 using TaleWorlds.Core;
 using TaleWorlds.GauntletUI;
-
+/// <summary>
+/// 모드파일/소스코드 무단수정 배포 금지합니다.
+/// Writer : shlifedev@gmail.com 
+/// </summary>
 namespace MBKoreanFont
 {
     [HarmonyPatch]

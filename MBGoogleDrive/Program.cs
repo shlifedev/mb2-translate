@@ -21,9 +21,7 @@ namespace GoogleDrive
         static void Main(string[] args)
         { 
             while (true)
-            {
-                CredentialManager.CredentialSheetService();
-                SheetManager.GetVersion(null, null);
+            { 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\t 최신 XML 다운로더입니다. 제작:shlifedev@gmail.com | 마공카 햄스터 에비츄");
                 Console.ForegroundColor = ConsoleColor.White;
@@ -50,13 +48,13 @@ namespace GoogleDrive
         }
         static void DownloadFromSheet()
         {
-            CredentialManager.CredentialDriveService();
+            CredentialManager.CredentialDriveServiceByToken();
             XMLSheetDownloader dl = new XMLSheetDownloader();
             dl.DownloadFromSheet($"Downloaded/LatestTranslate.xml");
         }
         static void Download()
         {
-            CredentialManager.CredentialDriveService();
+            CredentialManager.CredentialDriveServiceByToken();
             XMLDownloader dl = new XMLDownloader();
             dl.Init();
             dl.DownloadAll();

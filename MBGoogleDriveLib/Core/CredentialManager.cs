@@ -2,6 +2,7 @@
 using Google.Apis.Drive.v3;
 using Google.Apis.Drive.v3.Data;
 using Google.Apis.Services;
+using Google.Apis.Sheets.v4;
 using Google.Apis.Util.Store; 
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,15 @@ using System.Xml;
 
 public static class CredentialManager
 {
- 
-    static string ApplicationName = "Drive API .NET Quickstart";
+    
+    static string ApplicationName = "MB Translate";
     public static Google.Apis.Drive.v3.DriveService DriveService;
     public static Google.Apis.Sheets.v4.SheetsService SheetService;
-
+    private static string credentialPath = "secret.json";
+    public static void InitCredentialManager(string secretPath)
+    {
+        credentialPath = secretPath;
+    }
     public static void CredentialSheetService()
     {
         if (SheetService == null)
@@ -49,13 +54,13 @@ public static class CredentialManager
             Console.ForegroundColor = ConsoleColor.White;
         }
     }
-    public static void CredentialDriveSeriveByToken()
+    public static void CredentialDriveServiceByToken()
     {
         if (DriveService == null)
         {
             UserCredential credential;
             using (var stream =
-                new FileStream("secret.json", FileMode.Open, FileAccess.Read))
+                new FileStream(credentialPath, FileMode.Open, FileAccess.Read))
             {
                 string credPath = "token.json";
                 credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
@@ -75,6 +80,34 @@ public static class CredentialManager
             });
             DriveService = service;
             DriveManager.Init(service);
+        }
+    }
+    public static void CredentialSheetServiceByToken()
+    {
+        if (DriveService == null)
+        {
+            UserCredential credential;
+            using (var stream =
+                new FileStream(credentialPath, FileMode.Open, FileAccess.Read))
+            {
+                string credPath = "token.json";
+                credential = GoogleWebAuthorizationBroker.AuthorizeAsync(
+                    GoogleClientSecrets.Load(stream).Secrets,
+                    new string[] { SheetsService.Scope.Spreadsheets },
+                    "user",
+                    CancellationToken.None,
+                    new FileDataStore(credPath, true)).Result;
+                Console.WriteLine("Credential file saved to: " + credPath);
+            }
+
+            // Create Drive API service.
+            var service = new SheetsService(new BaseClientService.Initializer()
+            {
+                HttpClientInitializer = credential,
+                ApplicationName = ApplicationName,
+            });
+            SheetService = service;
+            SheetManager.Init(service);
         }
     }
 }
