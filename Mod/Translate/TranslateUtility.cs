@@ -20,7 +20,8 @@ namespace MBKoreanFont.Translate
         /// </summary>
         public static void DownloadLatestTranslate()
         {
-            CredentialManager.CredentialDriveService();
+            CredentialManager.InitCredentialManager($"../../Modules/{MBKoreanFontSubModule.ModuleName}/secret.json");
+            CredentialManager.CredentialDriveServiceByToken();
             XMLSheetDownloader dl = new XMLSheetDownloader();
             dl.DownloadFromSheet($"../../Modules/{MBKoreanFontSubModule.ModuleName}/ModuleData/Languages/KR/LatestTranslate.xml");
         }
@@ -30,7 +31,7 @@ namespace MBKoreanFont.Translate
         public static void ReloadTranslate()
         {
             try
-            { 
+            {
                 var _gameTextDictionary = typeof (LocalizedTextManager).GetField("_gameTextDictionary", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
                 //call clear();
                 _gameTextDictionary.GetType().GetMethod("Clear").Invoke(_gameTextDictionary, null);
