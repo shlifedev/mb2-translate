@@ -19,7 +19,16 @@ namespace GoogleDrive
         static string[] Scopes = { DriveService.Scope.DriveReadonly };
         static string ApplicationName = "Drive API .NET Quickstart"; 
         static void Main(string[] args)
-        { 
+        {
+
+
+            double hour = 6;
+            hour = hour%12;
+            double minute = 0;
+            double second = 0;
+            hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60)) + (second * Math.PI / (360 * 60));;
+
+            Console.WriteLine(hour);
             while (true)
             { 
                 Console.ForegroundColor = ConsoleColor.Green;

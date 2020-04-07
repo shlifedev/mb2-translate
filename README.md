@@ -7,11 +7,9 @@
  * 깔끔한 한국어 폰트 지원 **(게임 모드/C#)**
  * 실시간 번역 게임적용(Online DB)지원 **(게임 모드/C#)** 
  * 로컬 번역 취합 지원 **(어플리케이션/C#)**
- 
  * 번역가들이 매우 편리하게 번역을 할 수 있음. **(구글 시트)**
  * 관리자가 쉽게 모드의 언어파일을 추가 할 수 있음. **(구글 시트/Google Apps Script)**
-
-## Directory Info
+ 
 ### - MBGoogleDriveLib
  구글 드라이브 관련 라이브러리
 ### - MBGoogleDrive
@@ -22,9 +20,6 @@
  
  [공개 폴더](https://drive.google.com/drive/u/0/folders/1rukjjLdukPy2Xo-er38_mpYO5wBVv2Eq)
  
-# How to Install
- * Require Visual Stduio 2017/2019/.Net 4.6++
- * 올바른 테일월즈 DLL 참조를 위해 C드라이브 경로를 타는 정상 스팀 경로에 배너로드 설치 (필수사항 아님)
- 
-# Special Thank
- 이런 툴쯤이야 누군가가 시간만 넘치면 언제든지 쉽게 만들 수 있지만, 수백만개의 텍스트를 번역하는건 결코 쉬운일이 아닙니다. 번역가님들 감사합니다. 
+# 개발환경 구성
+ * Visual Stduio 2017 +
+ * 올바른 DLL 참조를 위해 C드라이브 경로를 타는 정상 스팀 경로에 배너로드 설치 (필수사항 아님)

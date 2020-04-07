@@ -67,11 +67,10 @@ namespace MBKoreanFont
 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
-            base.OnBeforeInitialModuleScreenSetAsRoot(); 
-            InformationManager.DisplayMessage(new InformationMessage("[MBKoreanFont] Develop Console :  CTRL + ` ", Color.FromUint(4282569842U)));
-        }
-
- 
+            base.OnBeforeInitialModuleScreenSetAsRoot();
+            InformationManager.DisplayMessage(new InformationMessage("[KoreanModule] Korean Mod Loaded! by.https://cafe.naver.com/warband", Color.FromUint(4282569842U)));
+            InformationManager.DisplayMessage(new InformationMessage("[KoreanModule] Develop Console :  CTRL + ` ", Color.FromUint(4282569842U)));
+        } 
         /* Load For Late Loaded FontMap Datas. */
         protected override void OnApplicationTick(float dt)
         {
@@ -85,7 +84,7 @@ namespace MBKoreanFont
             ScreenBase topScreen = ScreenManager.TopScreen;
             if (topScreen == null || !topScreen.DebugInput.IsControlDown() || !topScreen.DebugInput.IsKeyPressed(InputKey.Tilde))
                 return;
-            
+             
             toggle_imgui_console_visibility(new UIntPtr(1U));
         }
         public void LoadFontFromModule()

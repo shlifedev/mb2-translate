@@ -45,6 +45,9 @@ public class XMLSheetDownloader
             xmlSavePath = XmlSavePath;
         else
         {
+
+        }
+        {
             xmlSavePath = xmlPath;
         } 
         System.IO.Directory.CreateDirectory(new FileInfo(xmlPath).Directory.FullName);
