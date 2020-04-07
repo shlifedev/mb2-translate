@@ -9,15 +9,7 @@ using TaleWorlds.GauntletUI;
 /// Writer : shlifedev@gmail.com 
 /// </summary>
 namespace MBKoreanFont
-{
-    [HarmonyPatch]
-    public static class UIResourceManagerPatch
-    {
-        static void Prefix(Object __instance)
-        {
-
-        }
-    }
+{ 
 
     [HarmonyPatch]
     public static class EditableTextWidgetModule
