@@ -189,15 +189,19 @@ namespace MBKoreanFont
             base.OnSubModuleLoad();
             LoadFontFromModule();
             Harmony harmony = new Harmony("de.schplorg.bannerfix");
-            harmony.PatchAll();
-            AddStartMenu("Korean Load", LoadFontFromModule);
+            harmony.PatchAll(); 
             if (FontLoaded)
             {
                 AddStartMenu("최신번역다운", () =>
                 {
+                    if(UIResourceManager.FontFactory.CurrentLangageID != "한국어")
+                    {
+                        InformationManager.DisplayMessage(new InformationMessage("옵션에서 한국어로 바꾼 후 시도하세요1"));
+                        return;
+                    }
                     try
                     {
-                        InformationManager.ShowInquiry(new InquiryData("Korean Mod Patch", "Do You Want Download Lastest Korean Data?", true, true, "Yes", "No", () =>
+                        InformationManager.ShowInquiry(new InquiryData("번역 업데이트", "최신 한국어 번역 파일을 다운로드 받겠습니까?\n구글 앱 로그인이 필요합니다.", true, true, "Yes", "No", () =>
                         {
                             MBKoreanFont.Translate.TranslateUtility.DownloadLatestTranslate();
                             MBKoreanFont.Translate.TranslateUtility.ReloadTranslate();
@@ -205,11 +209,12 @@ namespace MBKoreanFont
                         {
 
                         }, ""));
-                        InformationManager.ShowInquiry(new InquiryData("Successfully!!", "", true, false, "Thank", null, null, null, ""));
+                        InformationManager.ShowInquiry(new InquiryData("번역 파일 다운로드 완료", "게임을 재접속 할 필요는 없습니다. 즐기세요!", true, false, "Thank", null, null, null, ""));
                     }
                     catch (Exception e)
                     {
-                        InformationManager.ShowInquiry(new InquiryData("Patch failed", "Patch download failed. => " + e.Message, true, false, "sorry..", null, null, null, ""));
+                        InformationManager.ShowInquiry(new InquiryData("실패 사유는 아래와 같습니다.", "1. 개발자가 막아둔경우.\n2.시트에오류가 있는경우.\n3.구글 트래픽 제한 (잠시후 다시시도)", true, false, "sorry..", null, null, null, ""));
+                        InformationManager.ShowInquiry(new InquiryData("실패! 개발자에게 메세지를 제보하세요", "실패 => " + e.Message, true, false, "sorry..", null, null, null, ""));
                     }
 
                 });
