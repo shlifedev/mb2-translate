@@ -85,6 +85,7 @@ namespace MBKoreanFont
             ScreenBase topScreen = ScreenManager.TopScreen;
             if (topScreen == null || !topScreen.DebugInput.IsControlDown() || !topScreen.DebugInput.IsKeyPressed(InputKey.Tilde))
                 return;
+            
             toggle_imgui_console_visibility(new UIntPtr(1U));
         }
         public void LoadFontFromModule()

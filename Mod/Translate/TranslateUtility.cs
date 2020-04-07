@@ -5,6 +5,7 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using TaleWorlds.Core;
+using TaleWorlds.Library;
 using TaleWorlds.Localization;
 /// <summary>
 /// 모드파일/소스코드 무단수정 배포 금지합니다.
@@ -14,7 +15,26 @@ namespace MBKoreanFont.Translate
 {
     public class TranslateUtility
     {
+        static System.DateTime NextQueryableTime;
 
+        public static string DownloadAndReloadTranslate()
+        {
+            InformationManager.ShowInquiry(new InquiryData("최신 번역 다운로드 Google 인증필요", "이 기능을 사용하려면 구글로그인으로 권한을 요청해야합니다.", true, true, "동의", "동의 안함", () =>
+            {
+                if (NextQueryableTime < System.DateTime.Now)
+                {
+                    MBKoreanFont.Translate.TranslateUtility.DownloadLatestTranslate();
+                    MBKoreanFont.Translate.TranslateUtility.ReloadTranslate();
+                    InformationManager.DisplayMessage(new InformationMessage("[한글모드 적용완료]일부 메세지는  메인화면으로 나갔다 온 이후 적용됩니다.", new Color(0, 1, 0, 1)));
+                    NextQueryableTime = System.DateTime.Now.AddSeconds(10);
+                }
+                else
+                {
+                    InformationManager.DisplayMessage(new InformationMessage("아직은 사용할 수 없습니다. 잠시후에 다시 시도하세요.", new Color(0, 1, 0, 1)));
+                }
+            }, null));
+            return "Succesfully! Latest Korean Translate File Downloaded.";
+        }
         /// <summary>
         /// 최신 시트를 다운로드 합니다
         /// </summary>
