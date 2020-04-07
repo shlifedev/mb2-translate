@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -56,6 +57,38 @@ namespace MBKoreanFont.Translate
                 //call clear();
                 _gameTextDictionary.GetType().GetMethod("Clear").Invoke(_gameTextDictionary, null);
                 TaleWorlds.Localization.LocalizedTextManager.LoadLocalizationXmls();
+            }
+            catch (Exception e)
+            {
+                InformationManager.ShowInquiry(new InquiryData("Except!!", e.Message, true, false, "ok", null, null, null, ""));
+            }
+        }
+
+        public static void LoadLocalizationKorean()
+        {
+            LocalizedTextManager.LanguageIds.Clear();  
+            string path = MBKoreanFontSubModule.ModulePath + "ModuleData/Languages";
+            if (Directory.Exists(path))
+            {
+                foreach (string file in Directory.GetFiles(path, "*.xml", SearchOption.AllDirectories))
+                {
+                    typeof(LocalizedTextManager).GetMethod("LoadLocalizedTexts").Invoke(null, new Object[] { file });
+                }
+            } 
+        }
+
+
+        /// <summary>
+        /// 한국어만 로드합니다.
+        /// </summary>
+        public static void LoadOnlyKorean()
+        {
+            try
+            {
+                var _gameTextDictionary = typeof (LocalizedTextManager).GetField("_gameTextDictionary", BindingFlags.Static | BindingFlags.NonPublic).GetValue(null);
+                //call clear();
+                _gameTextDictionary.GetType().GetMethod("Clear").Invoke(_gameTextDictionary, null);
+                LoadLocalizationKorean();
             }
             catch (Exception e)
             {

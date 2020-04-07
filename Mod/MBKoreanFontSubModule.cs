@@ -37,22 +37,25 @@ namespace MBKoreanFont
         public static extern void toggle_imgui_console_visibility(UIntPtr x);
 
         public static ModuleConfig config = new ModuleConfig();
-
+        public static string ModulePath
+        { 
+            get { return $"../../Modules/{ModuleName}/"; } 
+        }
         private static Dictionary<string, Dictionary<string, Font>> LocalizationMap;
         private static Dictionary<string, Font> DefaultFontMap;
         private static bool legit = false;
         /// <summary>
         /// Your Font File Name. (xxx.png, xxx.fnt)
         /// </summary>
-        public readonly string FontName = "kor";
+        public static string FontName = "kor";
         /// <summary>
         /// Xml Key Value.
         /// </summary>
-        public readonly string XMLKey = "한국어";
+        public static string XMLKey = "한국어";
         /// <summary>
         /// Cover Target.
         /// </summary>
-        public readonly string CoverFontName = "simkai";
+        public static string CoverFontName = "simkai";
         /// <summary>
         /// Module Name.
         /// </summary>
@@ -74,20 +77,14 @@ namespace MBKoreanFont
         /* Load For Late Loaded FontMap Datas. */
         protected override void OnApplicationTick(float dt)
         {
-            _gameUpTime += dt;
-            if (_gameUpTime >= 6)
-            {
-                LoadFontFromModule();
-                _gameUpTime = float.NegativeInfinity;
-            }
-
+            _gameUpTime += dt; 
             ScreenBase topScreen = ScreenManager.TopScreen;
             if (topScreen == null || !topScreen.DebugInput.IsControlDown() || !topScreen.DebugInput.IsKeyPressed(InputKey.Tilde))
                 return;
              
             toggle_imgui_console_visibility(new UIntPtr(1U));
         }
-        public void LoadFontFromModule()
+        public static void LoadFontFromModule()
         {
             if (IsLegitPlayer())
             {
