@@ -10,7 +10,8 @@
  
  * 번역가들이 매우 편리하게 번역을 할 수 있음. **(구글 시트)**
  * 관리자가 쉽게 모드의 언어파일을 추가 할 수 있음. **(구글 시트/Google Apps Script)**
- 
+
+## Directory Info
 ### - MBGoogleDriveLib
  구글 드라이브 관련 라이브러리
 ### - MBGoogleDrive
