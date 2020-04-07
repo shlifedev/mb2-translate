@@ -7,6 +7,7 @@
  
 # 번역 구글 드라이브 시트
  [구글 시트](https://docs.google.com/spreadsheets/d/1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo/edit#gid=0)
+ 
  [공개 폴더](https://drive.google.com/drive/u/0/folders/1rukjjLdukPy2Xo-er38_mpYO5wBVv2Eq)
  
 # 개발환경 구성
