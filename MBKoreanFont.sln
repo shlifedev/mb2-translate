@@ -5,11 +5,11 @@ VisualStudioVersion = 16.0.29806.167
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBKoreanFont", "Mod\MBKoreanFont.csproj", "{672F6DCD-7598-478E-81BA-D5417AEFC638}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBKoreanFontInstaller", "MBKoreanFontInstaller\MBKoreanFontInstaller.csproj", "{462C0142-71FC-4E30-B383-CBF8E917653E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBGoogleDrive", "MBGoogleDrive\MBGoogleDrive.csproj", "{F2FB7F40-5724-444A-947C-D096F495496B}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBGoogleDriveLib", "MBGoogleDriveLib\MBGoogleDriveLib.csproj", "{C0F7ADE7-9054-4154-BB01-F534A3745F93}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MBModAuthServer", "MBModAuthServer\MBModAuthServer.csproj", "{7DD9B25C-5E7B-446B-9151-2DB9076148E7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -33,18 +33,6 @@ Global
 		{672F6DCD-7598-478E-81BA-D5417AEFC638}.Release|Any CPU.Build.0 = Release|Any CPU
 		{672F6DCD-7598-478E-81BA-D5417AEFC638}.Release|x64.ActiveCfg = Release|x64
 		{672F6DCD-7598-478E-81BA-D5417AEFC638}.Release|x64.Build.0 = Release|x64
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug_LocalBuild|Any CPU.ActiveCfg = Debug|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug_LocalBuild|Any CPU.Build.0 = Debug|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug_LocalBuild|x64.ActiveCfg = Debug|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug_LocalBuild|x64.Build.0 = Debug|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug|x64.ActiveCfg = Debug|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Debug|x64.Build.0 = Debug|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Release|Any CPU.Build.0 = Release|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Release|x64.ActiveCfg = Release|Any CPU
-		{462C0142-71FC-4E30-B383-CBF8E917653E}.Release|x64.Build.0 = Release|Any CPU
 		{F2FB7F40-5724-444A-947C-D096F495496B}.Debug_LocalBuild|Any CPU.ActiveCfg = Debug_LocalBuild|Any CPU
 		{F2FB7F40-5724-444A-947C-D096F495496B}.Debug_LocalBuild|Any CPU.Build.0 = Debug_LocalBuild|Any CPU
 		{F2FB7F40-5724-444A-947C-D096F495496B}.Debug_LocalBuild|x64.ActiveCfg = Debug_LocalBuild|Any CPU
@@ -69,6 +57,18 @@ Global
 		{C0F7ADE7-9054-4154-BB01-F534A3745F93}.Release|Any CPU.Build.0 = Release|Any CPU
 		{C0F7ADE7-9054-4154-BB01-F534A3745F93}.Release|x64.ActiveCfg = Release|Any CPU
 		{C0F7ADE7-9054-4154-BB01-F534A3745F93}.Release|x64.Build.0 = Release|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Debug_LocalBuild|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Debug_LocalBuild|Any CPU.Build.0 = Debug|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Debug_LocalBuild|x64.ActiveCfg = Debug|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Debug_LocalBuild|x64.Build.0 = Debug|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Debug|x64.Build.0 = Debug|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Release|x64.ActiveCfg = Release|Any CPU
+		{7DD9B25C-5E7B-446B-9151-2DB9076148E7}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

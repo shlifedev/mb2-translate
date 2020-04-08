@@ -332,11 +332,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Translate\AutoKoreanTranslateDownloader.cs" />
+    <Compile Include="AuthClient.cs" />
     <Compile Include="Commands\Command_Translate.cs" />
-    <Compile Include="MBKoreanFontSubModule.cs" />
-    <Compile Include="EditableTextWidgetModule.cs" />
-    <Compile Include="ModuleConfig.cs" />
+    <Compile Include="SubModule\MBKoreanFontSubModule.cs" />
+    <Compile Include="PatchMethod\EditableTextWidgetModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextureLoader.cs" />
     <Compile Include="Translate\TranslateUtility.cs" />
