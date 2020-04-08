@@ -10,7 +10,7 @@ using Newtonsoft.Json;
 using CsvHelper;
 using System.IO;
 using System.Globalization;
-
+using MBGoogleDriveLib.Core;
 public class XMLSheetDownloader
 {
     static List<TranslateData> data = new List<TranslateData>(); 
@@ -68,7 +68,7 @@ public class XMLSheetDownloader
         textWriter.WriteEndElement();
         textWriter.WriteEndElement();
         textWriter.WriteStartElement("strings"); 
-        var csv = DriveManager.DownloadCSV("1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo"); 
+        var csv = DriveManager.DownloadCSV(GlobalConfig.TRANSLATE_SHEET_ID); 
         System.IO.File.WriteAllText(CSVSavePath, csv);
         var splitnl = csv.Split('\n');
         using (var reader = new StreamReader(CSVSavePath))

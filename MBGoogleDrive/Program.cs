@@ -19,26 +19,33 @@ namespace GoogleDrive
         static string[] Scopes = { DriveService.Scope.DriveReadonly };
         static string ApplicationName = "Drive API .NET Quickstart"; 
         static void Main(string[] args)
-        { 
+        {
+
+    
+            double hour = 6;
+            hour = hour%12;
+            double minute = 0;
+            double second = 0;
+            hour = (hour * Math.PI / 6) + (minute * Math.PI / (6 * 60)) + (second * Math.PI / (360 * 60));;
+
+            Console.WriteLine(hour);
             while (true)
             { 
                 Console.ForegroundColor = ConsoleColor.Green;
                 Console.WriteLine("\t 최신 XML 다운로더입니다. 제작:shlifedev@gmail.com | 마공카 햄스터 에비츄");
                 Console.ForegroundColor = ConsoleColor.White;
                 Console.WriteLine("최신 XML 다운로더입니다.");
-                var v = Console.ReadLine();
-                if (v == "1")
-                {
-                    Download();
-                }
-                else if (v == "2")
-                {
-                    PatchLanguageData();
-                }
-                else if (v == "3")
-                {
-                    DownloadFromSheet();
-                }
+
+                Console.WriteLine("\n\n1 입력시 최신번역을 다운로드 합니다.\n2 입력시 언어데이터를 취합합니다.");
+                var v = Console.ReadLine(); 
+
+                Console.Clear();
+                if (v == "1") 
+                    DownloadFromSheet();  
+                else if (v == "2") 
+                    PatchLanguageData(); 
+
+                System.Threading.Thread.Sleep(1000);
                 Console.Clear();
             }
         }

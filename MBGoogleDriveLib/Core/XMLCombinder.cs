@@ -19,17 +19,21 @@ public class XMLCombinder
         string v = "Id\tOriginal\tTranslate\tFilename\tModule\n";
         foreach (var data in dataMap)
         {
-            v += $"{data.Key}\t{data.Value.Original}\t{data.Value.Translate}\t{data.Value.Filename}\t{data.Value.Module}\n";
-
+            v += $"{data.Key}\t{data.Value.Original}\t{data.Value.Translate}\t{data.Value.Filename}\t{data.Value.Module}\n"; 
         }
         System.IO.File.WriteAllText(savePath, v);
         dataMap.Clear();
     }
      
 
-    private string TempModuleNameChecker(string diFullname)
-    {
-        string modName = "";
+    private string GetMoudleNameByPath(string diFullname)
+    { 
+        var idx = diFullname.LastIndexOf(@"Modules\");
+        var modulePath = diFullname.Substring(idx, (diFullname.Length-idx));
+        var mod = modulePath.Split('\\')[1]; 
+        string modName = mod;
+        return modName; 
+        //old code
         if (diFullname.Contains(@"Modules\SandBox"))
             modName = "SandBox";
         if (diFullname.Contains(@"Modules\SandBoxCore"))
@@ -70,13 +74,13 @@ public class XMLCombinder
                         if (dataMap.ContainsKey(id))
                             targetTranData = dataMap[id];
                         else //기존 번역이 불러와지지 않은 상태
-                        {
-                            
+                        { 
                             //기존 번역에 대한 번역 정보 작성.
                             targetTranData = new TranslateData();
                             targetTranData.Id = id;
-                            targetTranData.Filename = data.Name; 
-                            targetTranData.Module = TempModuleNameChecker(di.FullName);
+                            targetTranData.Filename = data.Name;
+                            if(lang != "한국어")
+                            targetTranData.Module = GetMoudleNameByPath(di.FullName);
                             dataMap.Add(id, targetTranData);
                         }
                         //언어 파악

@@ -21,28 +21,5 @@ public static class SheetManager
     public static void Init(SheetsService service)
     {
         Service = service;
-    }
-
-
-    public static string GetVersion()
-    {
-        CredentialManager.CredentialSheetServiceByToken();
-        String spreadsheetId = "1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo";
-        String range = "엑셀정보!B7";
-
-        SpreadsheetsResource.ValuesResource.GetRequest request = Service.Spreadsheets.Values.Get(spreadsheetId, range);
-        ValueRange response = request.Execute();
-        IList<IList<Object>> values = response.Values;
-        if (values != null && values.Count > 0)
-        { 
-            foreach (var row in values)
-            {
-                foreach(var col in row)
-                {
-                    Console.WriteLine(col);
-                }
-            } 
-        }
-            return null;
-    }
+    } 
 }

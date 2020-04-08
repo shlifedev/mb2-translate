@@ -77,6 +77,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Core\GlobalConfig.cs" />
     <Compile Include="Core\SheetManager.cs" />
     <Compile Include="Core\DriveManager.cs" />
     <Compile Include="Core\TranslateData.cs" />
@@ -86,7 +87,6 @@
     <Compile Include="Core\CredentialManager.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Patcher\LanguageXMLPatcher.cs" />
-    <Compile Include="Patcher\LanguageXmlPatcherConfig.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
