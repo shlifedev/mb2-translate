@@ -200,8 +200,8 @@ namespace MBKoreanFont
                         return;
                     }
                     try
-                    {
-                        InformationManager.ShowInquiry(new InquiryData("번역 업데이트", "최신 한국어 번역 파일을 다운로드 받겠습니까?\n구글 앱 로그인이 필요합니다.", true, true, "Yes", "No", () =>
+                        {
+                            InformationManager.ShowInquiry(new InquiryData("번역 업데이트", "최신 한국어 번역 파일을 다운로드 받겠습니까?\n구글 앱 로그인이 필요합니다.", true, true, "Yes", "No", () =>
                         {
                             MBKoreanFont.Translate.TranslateUtility.DownloadLatestTranslate();
                             MBKoreanFont.Translate.TranslateUtility.ReloadTranslate();

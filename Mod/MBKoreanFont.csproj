@@ -340,7 +340,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TextureLoader.cs" />
     <Compile Include="Translate\TranslateUtility.cs" />
-    <Compile Include="Utility\GameAuth.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />

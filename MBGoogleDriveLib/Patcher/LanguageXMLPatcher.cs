@@ -15,7 +15,7 @@ public static class LanguageXMLPatcher
         CredentialManager.CredentialDriveServiceByToken();
         XMLCombinder combinder = new XMLCombinder();
 
-        Logger.Log("배너로드 경로에서 XML 데이터 파일을 읽어옵니다.");
+        Logger.Log("배너로드 경로에서 XML 데이터 파일을 읽어옵니다."); 
         combinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\Native\ModuleData\Languages");
         combinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\SandBox\ModuleData\Languages");
         combinder.ReadXMLDatas(@"C:\Program Files (x86)\Steam\steamapps\common\Mount & Blade II Bannerlord\Modules\SandBoxCore\ModuleData\Languages");
