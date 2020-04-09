@@ -71,7 +71,15 @@ namespace MBKoreanFont
             base.OnBeforeInitialModuleScreenSetAsRoot();
             InformationManager.DisplayMessage(new InformationMessage("[KoreanModule] Korean Mod Loaded! by.https://cafe.naver.com/warband", Color.FromUint(4282569842U)));
             InformationManager.DisplayMessage(new InformationMessage("[KoreanModule] Develop Console :  CTRL + ` ", Color.FromUint(4282569842U)));
- 
+            var v = AuthClient.Connect();
+            if (v)
+            {
+                InformationManager.ShowInquiry(new InquiryData("테스터 인증 성공!", "올바른 모드 사용자입니다.\n 현재 테스터 모드입니다. 파일 유출시 유포자 추적 가능합니다. 절대 유포하지 마세요.", true, false, "OK", null, null, null));
+            }
+            else
+            {
+                InformationManager.ShowInquiry(new InquiryData("Server Auth Failed", "Can not use anymore korean mod. \nYour Licence is Invalid. \nPress ALT+F4 :D", false, false, null, null, () => { }, null), true);
+            }
         }
         /* Load For Late Loaded FontMap Datas. */
         protected override void OnApplicationTick(float dt)

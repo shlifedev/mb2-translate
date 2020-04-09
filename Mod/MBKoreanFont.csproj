@@ -19,7 +19,7 @@
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\MBKoreanFont\bin\Win64_Shipping_Client\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DefineConstants>TRACE;DEBUG;PRIVATE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
@@ -332,7 +332,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthClient.cs" />
+    <Compile Include="Auth\AuthClient.cs" />
     <Compile Include="Commands\Command_Translate.cs" />
     <Compile Include="SubModule\MBKoreanFontSubModule.cs" />
     <Compile Include="PatchMethod\EditableTextWidgetModule.cs" />
