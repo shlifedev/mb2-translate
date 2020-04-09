@@ -65,16 +65,26 @@ namespace MBModAuthServer
             } 
             // Return the hexadecimal string.
             return sBuilder.ToString();
-        }  
+        }
 
         static void AddKey(string value)
         {
             Logger.Log("Server::Addkey", value);
             UserAuth auth = new UserAuth();
-            auth.value = value; 
+            auth.value = value;
             auth.privateKey = getMd5Hash(value);
-            validKeys.Add(auth); 
+            validKeys.Add(auth);
             SaveAuth();
+        }
+        static void RemoveKey(string value)
+        {
+            var p = validKeys.Find(x => x.value == value);
+            if (p != null)
+            {
+                Logger.Log("Server::RemoveKey", value); 
+                validKeys.Remove(p);
+                SaveAuth();
+            }
         }
 
         static void LoadAuth()
@@ -126,10 +136,15 @@ namespace MBModAuthServer
 
         static void Command(string command)
         {
-            if(command.Contains("addkey"))
+            if (command.Contains("addkey"))
             {
                 var split = command.Split(' ');
                 AddKey(split[1]);
+            }
+            if (command.Contains("removekey"))
+            {
+                var split = command.Split(' ');
+                RemoveKey(split[1]);
             }
         }
         static void Main(string[] args)
@@ -141,11 +156,9 @@ namespace MBModAuthServer
             LoadAuth();
             while (true)
             {
-                int t = 1;
-                Console.Clear(); ;
+                int t = 1; 
                 foreach (var data in validKeys)
-                {
-            
+                { 
                     Console.ForegroundColor = ConsoleColor.White;
                     Console.WriteLine($"activate liecence : {t}.{data.value}\t{data.privateKey}\t{data.registeredIP}");
                     t++;
