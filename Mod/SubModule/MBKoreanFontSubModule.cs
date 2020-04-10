@@ -71,7 +71,7 @@ namespace MBKoreanFont
             base.OnBeforeInitialModuleScreenSetAsRoot();
             InformationManager.DisplayMessage(new InformationMessage("[KoreanModule] Korean Mod Loaded! by.https://cafe.naver.com/warband", Color.FromUint(4282569842U)));
             InformationManager.DisplayMessage(new InformationMessage("[KoreanModule] Develop Console :  CTRL + ` ", Color.FromUint(4282569842U)));
-            var v = AuthClient.Connect();
+            var v = AuthClient.valid == AuthClient.STATE.CONNECTED;
             if (v)
             {
                 InformationManager.ShowInquiry(new InquiryData("테스터 인증 성공!", "올바른 모드 사용자입니다.\n 현재 테스터 모드입니다. 파일 유출시 유포자 추적 가능합니다. 절대 유포하지 마세요.", true, false, "OK", null, null, null));

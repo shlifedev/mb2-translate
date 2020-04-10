@@ -19,31 +19,55 @@ namespace MBModAuthServer
             public string value; 
             public string privateKey;
             public string registeredIP;
+
+            public int auth_failed_count;
+            public int auth_successfully_count;
+
+            /// <summary>
+            /// 이 값이 TRUE면 요청시 registeredIP을 초기화
+            /// </summary>
+            public bool clear = false; 
         }
 
         static public List<UserAuth> validKeys = new List<UserAuth>();
         static (bool,string) Auth(string pkey, string ip)
         {
-            Logger.Log($"Auth {pkey}{ip}");
+       
             var data = validKeys.Find(x=>x.privateKey==pkey);
+
             if(data == null)
             {
+                Logger.Log($"Auth Failed {pkey}\t{ip}");
                 return (false, "NoExist");
             }
             else
             {
+                if (data.clear) {
+                    Logger.Log($"Clear AuthData {pkey}\t{ip}\t{data.value}");
+                    data.registeredIP = null;
+                    data.clear = false;
+                    SaveAuth();
+                }
                 if (data.registeredIP == ip)
-                { 
+                {
+                    Logger.Log($"Auth {pkey}\t{ip}\t{data.value}");
+                    data.auth_successfully_count++;
+                    SaveAuth();
                     return (true, "Auth!");
                 }
                 else if(string.IsNullOrEmpty(data.registeredIP))
                 {
                     data.registeredIP = ip;
+                    data.auth_successfully_count++; 
                     SaveAuth();
+                    Logger.Log($"Auth {pkey}\t{ip}\t{data.value}");
                     return (true, "Auth!");
                 } 
                 else
                 {
+                    data.auth_failed_count++;
+                    SaveAuth();
+                    Logger.Log($"본인이 아닌 사용자가 로그인 시도 인증시도키:{pkey}\tIP:{ip}\t키주인:{data.value}");
                     return (false, "InValid IP!");
                 }
             }
@@ -53,7 +77,7 @@ namespace MBModAuthServer
             // Create a new instance of the MD5CryptoServiceProvider object.
             MD5 md5Hasher = MD5.Create(); 
             // Convert the input string to a byte array and compute the hash.
-            byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(input)); 
+            byte[] data = md5Hasher.ComputeHash(Encoding.Default.GetBytes(input + "private")); 
             // Create a new Stringbuilder to collect the bytes
             // and create a string.
             StringBuilder sBuilder = new StringBuilder(); 
@@ -136,16 +160,52 @@ namespace MBModAuthServer
 
         static void Command(string command)
         {
-            if (command.Contains("addkey"))
+            try
             {
-                var split = command.Split(' ');
-                AddKey(split[1]);
+                if (command.Contains("addkey"))
+                {
+                    var split = command.Split(' ');
+                    AddKey(split[1]);
+                }
+                if (command.Contains("removekey"))
+                {
+                    var split = command.Split(' ');
+                    RemoveKey(split[1]);
+                }
+                if (command.Contains("clearkey"))
+                {
+                    validKeys.Clear();
+                    SaveAuth();
+                }
+                if (command.Contains("clear"))
+                {
+                    var split = command.Split(' ');
+                    var user = validKeys.Find(x=>x.value ==split[1]);
+                    if (user != null)
+                    {
+                        Logger.Log(user.value + " 의 private key가 클리어 예약 되었습니다.");
+                        user.clear = true;
+                    }
+                }
+                if(command.Contains("show"))
+                {
+                    var split = command.Split(' ');
+                    var user = validKeys.Find(x=>x.value ==split[1]);
+                    if (user != null)
+                    {
+                        var org =   Console.ForegroundColor;
+                        Console.ForegroundColor = ConsoleColor.Green;
+                        Console.WriteLine("\tShow Info");
+                        Console.WriteLine("\tName\tip\tLIC\tSuccess\tFailed");
+                        Console.WriteLine($"{user.value}\t{user.registeredIP}\t{user.privateKey}\t{user.auth_successfully_count}\t{user.auth_failed_count}"); 
+                    }
+                }
             }
-            if (command.Contains("removekey"))
+            catch
             {
-                var split = command.Split(' ');
-                RemoveKey(split[1]);
+
             }
+
         }
         static void Main(string[] args)
         {

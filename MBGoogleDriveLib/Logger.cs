@@ -7,8 +7,14 @@ using System.Threading.Tasks;
 public static class Logger
 {
     public static void WriteLog(string tag, string msg)
-    {
-        System.IO.File.WriteAllText("logs.txt", $"[{tag}, {System.DateTime.Now.ToString()}]" + msg);
+    { 
+        if(!System.IO.File.Exists("logs.txt"))
+        {
+            System.IO.File.WriteAllText("logs.txt", "doy~~");
+        }
+        System.IO.StreamWriter writer = new System.IO.StreamWriter("logs.txt");
+        writer.WriteLine($"[{tag}, {System.DateTime.Now.ToString()}]" + msg);
+        writer.Close();
     }
     public static void Log(string msg)
     {

@@ -25,7 +25,12 @@ namespace MBKoreanFont
                 return System.IO.File.ReadAllText(MBKoreanFontSubModule.ModulePath + "licence.txt");
             }
         }
-        public static bool valid = false;
+
+        public enum STATE
+        {
+            NONE, CONNETING, CONNECTED
+        }
+        public static STATE valid = STATE.NONE;
 
         public static string SendMsg(string msg)
         {
@@ -51,20 +56,26 @@ namespace MBKoreanFont
         public static bool Connect()
         {
 #if PRIVATE
+            if(valid == STATE.CONNECTED) return true;
+            if(valid == STATE.CONNETING) return false;
+            valid = STATE.CONNETING;
             try
             {
                 string v =  SendMsg(key);
                 if (v == "Valid")
                 {
+                    valid =  STATE.CONNECTED;
                     return true;
                 }
                 else
                 {
+                    valid = STATE.NONE;
                     return false;
                 }
             }
             catch (SocketException e)
             {
+                valid = STATE.NONE;
                 return false;
             }
         }
