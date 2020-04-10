@@ -64,6 +64,9 @@ namespace MBKoreanFont.Translate
             }
         }
 
+        /// <summary>
+        /// 텍스트를 읽는 함수에 대한 구현
+        /// </summary>
         public static void LoadLocalizationKorean()
         {
             LocalizedTextManager.LanguageIds.Clear();  
@@ -81,7 +84,7 @@ namespace MBKoreanFont.Translate
         /// <summary>
         /// 한국어만 로드합니다.
         /// </summary>
-        public static void LoadOnlyKorean()
+        public static void LoadKorean()
         {
             try
             {
