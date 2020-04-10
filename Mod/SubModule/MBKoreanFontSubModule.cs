@@ -91,19 +91,20 @@ namespace MBKoreanFont
 
             toggle_imgui_console_visibility(new UIntPtr(1U));
         }
+        
         public static void LoadFontFromModule()
         {
 
             var v = AuthClient.Connect();
             if (v)
             {
-                InformationManager.ShowInquiry(new InquiryData("테스터 인증 성공!", "올바른 모드 사용자입니다.\n 현재 테스터 모드입니다. 파일 유출시 유포자 추적 가능합니다. 절대 유포하지 마세요.", true, false, "OK", null, null, null)); 
+                InformationManager.ShowInquiry(new InquiryData("테스터 인증 성공!", "올바른 모드 사용자입니다.\n 현재 테스터 모드입니다. 파일 유출시 유포자 추적 가능합니다. 절대 유포하지 마세요.", true, false, "OK", null, null, null));
             }
             else
             {
-                InformationManager.ShowInquiry(new InquiryData("Server Auth Failed", "Can not use anymore korea mod. \nYour Licence is Invalid. \nPress ALT+F4 :D", false,false,null,null,()=> { },null), true); 
+                InformationManager.ShowInquiry(new InquiryData("Server Auth Failed", "Can not use anymore korea mod. \nYour Licence is Invalid. \nPress ALT+F4 :D", false, false, null, null, () => { }, null), true);
             }
-
+            if (AuthClient.IsSteamAuth() != AuthClient.Auth.Good) return;
             if (IsLegitPlayer() && v)
             {
                 //load texture
@@ -199,8 +200,11 @@ namespace MBKoreanFont
                 },
              false));
         }
+ 
         protected override void OnSubModuleLoad()
         {
+            if (AuthClient.IsSteamAuth() != AuthClient.Auth.Good) return;
+
             base.OnSubModuleLoad();
             LoadFontFromModule();
             Harmony harmony = new Harmony("bannerlord.fix");
@@ -208,31 +212,31 @@ namespace MBKoreanFont
             if (FontLoaded)
             { 
                 AddStartMenu("최신번역다운", () =>
+             {
+                 if (UIResourceManager.FontFactory.CurrentLangageID != "한국어")
                  {
-                     if (UIResourceManager.FontFactory.CurrentLangageID != "한국어")
-                     {
-                         InformationManager.DisplayMessage(new InformationMessage("옵션에서 한국어로 바꾼 후 시도하세요1"));
-                         return;
-                     }
-                     try
-                     {
-                         InformationManager.ShowInquiry(new InquiryData("번역 업데이트", "최신 한국어 번역 파일을 다운로드 받겠습니까?\n구글 앱 로그인이 필요합니다.", true, true, "Yes", "No", () =>
+                     InformationManager.DisplayMessage(new InformationMessage("옵션에서 한국어로 바꾼 후 시도하세요1"));
+                     return;
+                 }
+                 try
+                 {
+                     InformationManager.ShowInquiry(new InquiryData("번역 업데이트", "최신 한국어 번역 파일을 다운로드 받겠습니까?\n구글 앱 로그인이 필요합니다.", true, true, "Yes", "No", () =>
+                {
+                    MBKoreanFont.Translate.TranslateUtility.DownloadLatestTranslate();
+                    MBKoreanFont.Translate.TranslateUtility.ReloadTranslate();
+                }, () =>
                     {
-                             MBKoreanFont.Translate.TranslateUtility.DownloadLatestTranslate();
-                             MBKoreanFont.Translate.TranslateUtility.ReloadTranslate();
-                         }, () =>
-                         {
 
-                         }, ""));
-                         InformationManager.ShowInquiry(new InquiryData("번역 파일 다운로드 완료", "게임을 재접속 할 필요는 없습니다. 즐기세요!", true, false, "Thank", null, null, null, ""));
-                     }
-                     catch (Exception e)
-                     {
-                         InformationManager.ShowInquiry(new InquiryData("실패 사유는 아래와 같습니다.", "1. 개발자가 막아둔경우.\n2.시트에오류가 있는경우.\n3.구글 트래픽 제한 (잠시후 다시시도)", true, false, "sorry..", null, null, null, ""));
-                         InformationManager.ShowInquiry(new InquiryData("실패! 개발자에게 메세지를 제보하세요", "실패 => " + e.Message, true, false, "sorry..", null, null, null, ""));
-                     }
+                     }, ""));
+                     InformationManager.ShowInquiry(new InquiryData("번역 파일 다운로드 완료", "게임을 재접속 할 필요는 없습니다. 즐기세요!", true, false, "Thank", null, null, null, ""));
+                 }
+                 catch (Exception e)
+                 {
+                     InformationManager.ShowInquiry(new InquiryData("실패 사유는 아래와 같습니다.", "1. 개발자가 막아둔경우.\n2.시트에오류가 있는경우.\n3.구글 트래픽 제한 (잠시후 다시시도)", true, false, "sorry..", null, null, null, ""));
+                     InformationManager.ShowInquiry(new InquiryData("실패! 개발자에게 메세지를 제보하세요", "실패 => " + e.Message, true, false, "sorry..", null, null, null, ""));
+                 }
 
-                 });
+             });
             }
         }
 
