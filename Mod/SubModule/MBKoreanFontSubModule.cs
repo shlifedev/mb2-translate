@@ -90,13 +90,12 @@ namespace MBKoreanFont
                 return;
 
             toggle_imgui_console_visibility(new UIntPtr(1U));
-        }
-        
+        }     
         public static void LoadFontFromModule()
         {
 
-            var v = AuthClient.Connect();
-            if (v)
+            var licence = AuthClient.Connect();
+            if (licence)
             {
                 InformationManager.ShowInquiry(new InquiryData("테스터 인증 성공!", "올바른 모드 사용자입니다.\n 현재 테스터 모드입니다. 파일 유출시 유포자 추적 가능합니다. 절대 유포하지 마세요.", true, false, "OK", null, null, null));
             }
@@ -104,8 +103,12 @@ namespace MBKoreanFont
             {
                 InformationManager.ShowInquiry(new InquiryData("Server Auth Failed", "Can not use anymore korea mod. \nYour Licence is Invalid. \nPress ALT+F4 :D", false, false, null, null, () => { }, null), true);
             }
-            if (AuthClient.IsSteamAuth() != AuthClient.Auth.Good) return;
-            if (IsLegitPlayer() && v)
+            if (AuthClient.IsSteamAuth() != AuthClient.Auth.Good)
+            {
+                InformationManager.DisplayMessage(new InformationMessage("Auth Failed."));
+                return;
+            }
+            if (licence)
             {
                 //load texture
                 GameTex texture = new GameTex((ITexture) new EngineTexture(EngineTex.CreateTextureFromPath($"../../Modules/{ModuleName}/Font", $"{FontName}.png")));
@@ -158,36 +161,6 @@ namespace MBKoreanFont
             {
                 InformationManager.ShowInquiry(new InquiryData("Module Load Faile!", "failed load module.", true, false, ":(", null, null, null));
             }
-        }
-        /// <summary>
-        /// You Bokdol..?
-        /// </summary>
-        /// <returns></returns>
-        public static bool IsLegitPlayer()
-        {
-            return true;
-            try
-            {
-                if (legit == true) return true;
-                var value = Microsoft.Win32.Registry.GetValue(@"HKEY_LOCAL_MACHINE\SOFTWARE\WOW6432Node\Valve\Steam", "InstallPath", null);
-                if (string.IsNullOrEmpty(value.ToString()))
-                {
-                    return false;
-                }
-                var ret =  value + @"\steamapps\";
-                var di = new System.IO.DirectoryInfo(ret);
-                var bannerlordACF = di.GetFiles("*.acf").Where(x=>x.Name.Contains("261550")).First();
-                if (bannerlordACF != null)
-                {
-                    legit = true;
-                    return legit;
-                }
-            }
-            catch (Exception e)
-            {
-                return legit;
-            }
-            return legit;
         }
         public void AddStartMenu(string name, System.Action callback)
         {
@@ -242,7 +215,4 @@ namespace MBKoreanFont
 
     }
 
-}
-
-
-
+} 

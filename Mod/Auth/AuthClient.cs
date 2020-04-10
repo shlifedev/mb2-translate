@@ -28,14 +28,12 @@ namespace MBKoreanFont
                 }
                 return System.IO.File.ReadAllText(MBKoreanFontSubModule.ModulePath + "licence.txt");
             }
-        }
-
+        } 
         public enum STATE
         {
             NONE, CONNETING, CONNECTED
         }
         public static STATE valid = STATE.NONE;
-
         public static string SendMsg(string msg)
         {
             try
@@ -87,7 +85,6 @@ namespace MBKoreanFont
         return true;
 #endif  
         }
-
         public enum Auth
         {
             None,
@@ -95,9 +92,8 @@ namespace MBKoreanFont
             FailedByFoundPage,
             FailedByOwnerShip,
             FailedByKnownCrackID,
-            Unknown
-        }
-
+                Unknown
+            }
         public static Action<Auth> onAuthEvent;
         public static Auth currentState;
         public static Auth IsSteamAuth()
