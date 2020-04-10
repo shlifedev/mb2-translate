@@ -127,6 +127,8 @@ namespace MBModAuthServer
             var js = Newtonsoft.Json.JsonConvert.SerializeObject(validKeys);
             System.IO.File.WriteAllText("auth.json", js);
         }
+
+      
         static void Auth()
         {
             LoadAuth();
@@ -161,21 +163,33 @@ namespace MBModAuthServer
         static void Command(string command)
         {
             try
-            {
-                if (command.Contains("addkey"))
-                {
-                    var split = command.Split(' ');
-                    AddKey(split[1]);
+            { 
+                if(command.Contains("get_js_array"))
+                { 
+                    Console.WriteLine("var testKey = []");
+                    foreach(var data in validKeys)
+                    {
+                        Console.WriteLine($"testKey['{data.value}'] = '{data.privateKey}'");
+                    }
+                    return;
                 }
                 if (command.Contains("removekey"))
                 {
                     var split = command.Split(' ');
                     RemoveKey(split[1]);
+                    return;
+                }
+                if (command.Contains("addkey"))
+                {
+                    var split = command.Split(' ');
+                    AddKey(split[1]);
+                    return;
                 }
                 if (command.Contains("clearkey"))
                 {
                     validKeys.Clear();
                     SaveAuth();
+                    return;
                 }
                 if (command.Contains("clear"))
                 {
@@ -186,8 +200,9 @@ namespace MBModAuthServer
                         Logger.Log(user.value + " 의 private key가 클리어 예약 되었습니다.");
                         user.clear = true;
                     }
+                    return;
                 }
-                if(command.Contains("show"))
+                if(command.Contains("userinfo"))
                 {
                     var split = command.Split(' ');
                     var user = validKeys.Find(x=>x.value ==split[1]);
@@ -199,6 +214,17 @@ namespace MBModAuthServer
                         Console.WriteLine("\tName\tip\tLIC\tSuccess\tFailed");
                         Console.WriteLine($"{user.value}\t{user.registeredIP}\t{user.privateKey}\t{user.auth_successfully_count}\t{user.auth_failed_count}"); 
                     }
+                    return;
+                }
+                if(command == ("print_all_user"))
+                {
+                    int t = 1;
+                    foreach (var data in validKeys)
+                    {
+                        Console.ForegroundColor = ConsoleColor.White;
+                        Console.WriteLine($"activate liecence : {t}.{data.value}\t{data.privateKey}\t{data.registeredIP}");
+                        t++;
+                    }
                 }
             }
             catch
@@ -206,6 +232,17 @@ namespace MBModAuthServer
 
             }
 
+        }
+
+        static void print()
+        {
+            int t = 1;
+            foreach (var data in validKeys)
+            {
+                Console.ForegroundColor = ConsoleColor.White;
+                Console.WriteLine($"activate liecence : {t}.{data.value}\t{data.privateKey}\t{data.registeredIP}");
+                t++;
+            }
         }
         static void Main(string[] args)
         {
@@ -216,13 +253,7 @@ namespace MBModAuthServer
             LoadAuth();
             while (true)
             {
-                int t = 1; 
-                foreach (var data in validKeys)
-                { 
-                    Console.ForegroundColor = ConsoleColor.White;
-                    Console.WriteLine($"activate liecence : {t}.{data.value}\t{data.privateKey}\t{data.registeredIP}");
-                    t++;
-                }
+              
                 var p = Console.ReadLine(); 
                 Command(p);
             }

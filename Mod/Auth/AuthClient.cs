@@ -13,7 +13,7 @@ namespace MBKoreanFont
 
     public class AuthClient
     {
-        public static string TargetIP = "127.0.0.1";
+        public static string TargetIP = "121.140.154.113";
         public static string key
         {
             get
