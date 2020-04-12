@@ -11,7 +11,10 @@ using TaleWorlds.Localization;
 /// <summary>
 /// 모드파일/소스코드 무단수정 배포 금지합니다.
 /// Writer : shlifedev@gmail.com 
-/// </summary>
+/// </summary> 
+/// 
+
+#if USE_GOOGLE_API
 namespace MBKoreanFont.Translate
 {
     public class TranslateUtility
@@ -100,3 +103,4 @@ namespace MBKoreanFont.Translate
         }
     }
 }
+#endif
