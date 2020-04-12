@@ -15,17 +15,19 @@
     <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
+    <DebugSymbols>false</DebugSymbols>
+    <DebugType>none</DebugType>
     <Optimize>false</Optimize>
     <OutputPath>..\..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\MBKoreanFont\bin\Win64_Shipping_Client\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;PRIVATE</DefineConstants>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <PlatformTarget>x64</PlatformTarget>
+    <GenerateSerializationAssemblies>Off</GenerateSerializationAssemblies>
+    <TreatWarningsAsErrors>false</TreatWarningsAsErrors>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
+    <DebugType>none</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>..\..\..\..\..\..\..\Program Files %28x86%29\Steam\steamapps\common\Mount &amp; Blade II Bannerlord\Modules\MBKoreanFont\bin\Win64_Shipping_Client\</OutputPath>
     <DefineConstants>TRACE</DefineConstants>
@@ -340,7 +342,7 @@
     <Compile Include="SubModule\MBKoreanFontSubModule.cs" />
     <Compile Include="PatchMethod\EditableTextWidgetModule.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TextureLoader.cs" />
+    <Compile Include="SubModule\TextureLoader.cs" />
     <Compile Include="Translate\TranslateUtility.cs" />
   </ItemGroup>
   <ItemGroup>

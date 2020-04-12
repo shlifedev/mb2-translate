@@ -111,10 +111,10 @@ namespace MBKoreanFont
                 }
                 if(providerName == "Steam")
                 { 
-                    var userid = PlatformServices.UserId;
-
+                    var userid = PlatformServices.UserId; 
                     //first web req
                     WebRequest request = WebRequest.Create($"https://steamcommunity.com/profiles/{userid}");
+
                     WebResponse response = request.GetResponse();
                     using (Stream dataStream = response.GetResponseStream())
                     {
@@ -140,6 +140,7 @@ namespace MBKoreanFont
                 }
                 currentState = Auth.Good;
                 onAuthEvent?.Invoke(Auth.Good);
+
                 return Auth.Good;
             }
             catch(Exception e)

@@ -32,9 +32,7 @@ namespace MBKoreanFont
     /// Special Thanks : Akintos  
     /// </summary>
     public class MBKoreanFontSubModule : MBSubModuleBase
-    {
-        [DllImport("Rgl.dll", EntryPoint = "?toggle_imgui_console_visibility@rglCommand_line_manager@@QEAAXXZ", CallingConvention = CallingConvention.Cdecl)]
-        public static extern void toggle_imgui_console_visibility(UIntPtr x);
+    { 
         public static string ModulePath
         {
             get { return $"../../Modules/{ModuleName}/"; }
@@ -61,8 +59,7 @@ namespace MBKoreanFont
         /// <summary>
         /// SinceUp Time.
         /// </summary>
-        private float _gameUpTime = 0;
-
+        private float _gameUpTime = 0; 
         public static bool FontLoaded { get; set; }
         public static Font font;
 
@@ -70,44 +67,11 @@ namespace MBKoreanFont
         {
             base.OnBeforeInitialModuleScreenSetAsRoot();
             InformationManager.DisplayMessage(new InformationMessage("[KoreanModule] Korean Mod Loaded! by.https://cafe.naver.com/warband", Color.FromUint(4282569842U)));
-            InformationManager.DisplayMessage(new InformationMessage("[KoreanModule] Develop Console :  CTRL + ` ", Color.FromUint(4282569842U)));
-            var v = AuthClient.valid == AuthClient.STATE.CONNECTED;
-            if (v)
-            {
-                InformationManager.ShowInquiry(new InquiryData("테스터 인증 성공!", "올바른 모드 사용자입니다.\n 현재 테스터 모드입니다. 파일 유출시 유포자 추적 가능합니다. 절대 유포하지 마세요.", true, false, "OK", null, null, null));
-            }
-            else
-            {
-                InformationManager.ShowInquiry(new InquiryData("Server Auth Failed", "Can not use anymore korean mod. \nYour Licence is Invalid. \nPress ALT+F4 :D", false, false, null, null, () => { }, null), true);
-            }
-        }
-        /* Load For Late Loaded FontMap Datas. */
-        protected override void OnApplicationTick(float dt)
-        {
-            _gameUpTime += dt;
-            ScreenBase topScreen = ScreenManager.TopScreen;
-            if (topScreen == null || !topScreen.DebugInput.IsControlDown() || !topScreen.DebugInput.IsKeyPressed(InputKey.Tilde))
-                return;
-
-            toggle_imgui_console_visibility(new UIntPtr(1U));
-        }     
+            InformationManager.DisplayMessage(new InformationMessage("[KoreanModule] Develop Console :  CTRL + ` ", Color.FromUint(4282569842U))); 
+        } 
         public static void LoadFontFromModule()
-        {
-
-            var licence = AuthClient.Connect();
-            if (licence)
-            {
-                InformationManager.ShowInquiry(new InquiryData("테스터 인증 성공!", "올바른 모드 사용자입니다.\n 현재 테스터 모드입니다. 파일 유출시 유포자 추적 가능합니다. 절대 유포하지 마세요.", true, false, "OK", null, null, null));
-            }
-            else
-            {
-                InformationManager.ShowInquiry(new InquiryData("Server Auth Failed", "Can not use anymore korea mod. \nYour Licence is Invalid. \nPress ALT+F4 :D", false, false, null, null, () => { }, null), true);
-            }
-            if (AuthClient.IsSteamAuth() != AuthClient.Auth.Good)
-            {
-                InformationManager.DisplayMessage(new InformationMessage("Auth Failed."));
-                return;
-            }
+        { 
+            var licence = true;
             if (licence)
             {
                 //load texture
@@ -138,15 +102,11 @@ namespace MBKoreanFont
                 typeof (FontFactory).GetField("_fontLocalizationMap", BindingFlags.Instance | BindingFlags.NonPublic)
                 .GetValue((object) UIResourceManager.FontFactory)
                 as Dictionary<string, Dictionary<string, Font>>;
-                _bitmapFont[CoverFontName] = font;
-
-
+                _bitmapFont[CoverFontName] = font; 
 
                 Dictionary<string, Font> _defaultFontMap =
                 typeof (FontFactory).GetField("_fontLocalizationMap", BindingFlags.Instance | BindingFlags.NonPublic)
-                .GetValue((object) UIResourceManager.FontFactory) as Dictionary<string, Font>;
-
-
+                .GetValue((object) UIResourceManager.FontFactory) as Dictionary<string, Font>; 
 
                 LocalizationMap = _localizationMap;
                 /* cover font data. */
@@ -172,45 +132,43 @@ namespace MBKoreanFont
                     callback();
                 },
              false));
-        }
- 
+        } 
         protected override void OnSubModuleLoad()
         {
-            if (AuthClient.IsSteamAuth() != AuthClient.Auth.Good) return;
-
+            if (AuthClient.IsSteamAuth() != AuthClient.Auth.Good) return; 
             base.OnSubModuleLoad();
             LoadFontFromModule();
             Harmony harmony = new Harmony("bannerlord.fix");
             harmony.PatchAll();
-            if (FontLoaded)
-            { 
-                AddStartMenu("최신번역다운", () =>
-             {
-                 if (UIResourceManager.FontFactory.CurrentLangageID != "한국어")
-                 {
-                     InformationManager.DisplayMessage(new InformationMessage("옵션에서 한국어로 바꾼 후 시도하세요1"));
-                     return;
-                 }
-                 try
-                 {
-                     InformationManager.ShowInquiry(new InquiryData("번역 업데이트", "최신 한국어 번역 파일을 다운로드 받겠습니까?\n구글 앱 로그인이 필요합니다.", true, true, "Yes", "No", () =>
-                {
-                    MBKoreanFont.Translate.TranslateUtility.DownloadLatestTranslate();
-                    MBKoreanFont.Translate.TranslateUtility.ReloadTranslate();
-                }, () =>
-                    {
+            //if (FontLoaded)
+            //{ 
+            //    AddStartMenu("최신번역다운", () =>
+            // {
+            //     if (UIResourceManager.FontFactory.CurrentLangageID != "한국어")
+            //     {
+            //         InformationManager.DisplayMessage(new InformationMessage("옵션에서 한국어로 바꾼 후 시도하세요1"));
+            //         return;
+            //     }
+            //     try
+            //     {
+            //         InformationManager.ShowInquiry(new InquiryData("번역 업데이트", "최신 한국어 번역 파일을 다운로드 받겠습니까?\n구글 앱 로그인이 필요합니다.", true, true, "Yes", "No", () =>
+            //    {
+            //        MBKoreanFont.Translate.TranslateUtility.DownloadLatestTranslate();
+            //        MBKoreanFont.Translate.TranslateUtility.ReloadTranslate();
+            //    }, () =>
+            //        {
 
-                     }, ""));
-                     InformationManager.ShowInquiry(new InquiryData("번역 파일 다운로드 완료", "게임을 재접속 할 필요는 없습니다. 즐기세요!", true, false, "Thank", null, null, null, ""));
-                 }
-                 catch (Exception e)
-                 {
-                     InformationManager.ShowInquiry(new InquiryData("실패 사유는 아래와 같습니다.", "1. 개발자가 막아둔경우.\n2.시트에오류가 있는경우.\n3.구글 트래픽 제한 (잠시후 다시시도)", true, false, "sorry..", null, null, null, ""));
-                     InformationManager.ShowInquiry(new InquiryData("실패! 개발자에게 메세지를 제보하세요", "실패 => " + e.Message, true, false, "sorry..", null, null, null, ""));
-                 }
+            //         }, ""));
+            //         InformationManager.ShowInquiry(new InquiryData("번역 파일 다운로드 완료", "게임을 재접속 할 필요는 없습니다. 즐기세요!", true, false, "Thank", null, null, null, ""));
+            //     }
+            //     catch (Exception e)
+            //     {
+            //         InformationManager.ShowInquiry(new InquiryData("실패 사유는 아래와 같습니다.", "1. 개발자가 막아둔경우.\n2.시트에오류가 있는경우.\n3.구글 트래픽 제한 (잠시후 다시시도)", true, false, "sorry..", null, null, null, ""));
+            //         InformationManager.ShowInquiry(new InquiryData("실패! 개발자에게 메세지를 제보하세요", "실패 => " + e.Message, true, false, "sorry..", null, null, null, ""));
+            //     }
 
-             });
-            }
+            // });
+            //}
         }
 
     }

@@ -19,7 +19,7 @@ public class XMLCombinder
         string v = "Id\tOriginal\tTranslate\tFilename\tModule\n";
         foreach (var data in dataMap)
         {
-            v += $"{data.Key}\t{data.Value.Original}\t{data.Value.Translate}\t{data.Value.Filename}\t{data.Value.Module}\n"; 
+            v += $"{data.Key}\t'{data.Value.Original}\t'{data.Value.Translate}\t{data.Value.Filename}\t{data.Value.Module}\n"; 
         }
         System.IO.File.WriteAllText(savePath, v);
         dataMap.Clear();
