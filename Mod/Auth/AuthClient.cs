@@ -12,9 +12,7 @@ using TaleWorlds.PlatformService;
 using TaleWorlds.PlatformService.Steam;
 
 namespace MBKoreanFont
-{
-
-
+{ 
     public class AuthClient
     {
         public static string TargetIP = "121.140.154.113";

@@ -42,8 +42,7 @@ namespace MBKoreanFont
                 }
             }
         } 
-
-        //OnUpdate에서 호출합니다.
+         
         [HarmonyPatch(typeof(EditableTextWidget), "UpdateFontData")] 
         static void Prefix(Object __instance)
         {
