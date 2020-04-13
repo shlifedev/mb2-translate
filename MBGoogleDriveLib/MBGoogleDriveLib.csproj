@@ -81,7 +81,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Core\GlobalConfig.cs" />
+    <Compile Include="Core\Setting.cs" />
     <Compile Include="Core\SheetManager.cs" />
     <Compile Include="Core\DriveManager.cs" />
     <Compile Include="Core\TranslateData.cs" />
@@ -99,6 +99,15 @@
   <ItemGroup>
     <Folder Include="SheetDownloader\" />
     <Folder Include="XmlDocToXmlDownloader\" />
+  </ItemGroup>
+  <ItemGroup>
+    <WCFMetadata Include="Connected Services\" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Config\Config.csproj">
+      <Project>{5af8b876-1646-4d4e-a313-a32ea7aa5d80}</Project>
+      <Name>Config</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

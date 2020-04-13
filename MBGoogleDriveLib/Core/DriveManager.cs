@@ -19,15 +19,11 @@ public static class DriveManager
     public static void Init(DriveService service)
     {
         Service = service;
-
-  
     }
     public static string GetFileName(string fileID)
     {
         return Service.Files.Get(fileID).Execute().Name;
     }
-     
-
     public static string DownloadCSV(string fileID)
     {
         String fileId = fileID;
@@ -60,7 +56,6 @@ public static class DriveManager
         var v = System.Text.Encoding.UTF8.GetString(stream.ToArray());
         return v;
     }
-
     public static string DownloadXML(string fileID)
     {
         String fileId = fileID;
@@ -93,8 +88,6 @@ public static class DriveManager
         var v = System.Text.Encoding.UTF8.GetString(stream.ToArray());
         return v;
     }
-
-
     private static void SaveStream(System.IO.MemoryStream stream, string saveTo)
     {
         using (System.IO.FileStream file = new System.IO.FileStream(saveTo, System.IO.FileMode.Create, System.IO.FileAccess.Write))
@@ -102,7 +95,6 @@ public static class DriveManager
             stream.WriteTo(file);
         }
     }
-
     public static IEnumerable<Google.Apis.Drive.v3.Data.File> GetFolderFiles(string folderID, string filterExtention = null)
     {
         var request = Service.Files.List();

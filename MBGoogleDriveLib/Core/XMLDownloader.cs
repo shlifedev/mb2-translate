@@ -6,12 +6,14 @@ using System.Threading.Tasks;
 using System.Xml;
 using System.Xml.Schema;
 using GoogleFile = Google.Apis.Drive.v3.Data.File;
-using Newtonsoft.Json;
+using Newtonsoft.Json; 
+[Obsolete]
 public class CachedXML
 {
     public string id;
     public string originalFileName;
 }
+[Obsolete]
 public class XMLDownloader
 {
     public List<CachedXML> cachedXML = new List<CachedXML>();

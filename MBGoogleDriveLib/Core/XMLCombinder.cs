@@ -32,16 +32,7 @@ public class XMLCombinder
         var modulePath = diFullname.Substring(idx, (diFullname.Length-idx));
         var mod = modulePath.Split('\\')[1]; 
         string modName = mod;
-        return modName; 
-        //old code
-        if (diFullname.Contains(@"Modules\SandBox"))
-            modName = "SandBox";
-        if (diFullname.Contains(@"Modules\SandBoxCore"))
-            modName = "SandBoxCore";
-        else if (diFullname.Contains(@"Modules\Native")) 
-            modName = "Native"; 
-        else modName ="Unknown";
-        return modName;
+        return modName;  
     }
     /// <summary>
     /// 경로에서 xml을 읽어서 dataMap에 저장.
