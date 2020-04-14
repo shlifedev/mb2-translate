@@ -43,7 +43,7 @@ namespace MBKoreanFont
         /// <summary>
         /// Your Font File Name. (xxx.png, xxx.fnt)
         /// </summary>
-        public static string FontName = "nanum_gothic";
+        public static string FontName = "nanumgothic";
         /// <summary>
         /// Xml Key Value.
         /// </summary>
