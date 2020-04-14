@@ -11,8 +11,13 @@ public static class Setting
         get
         {
             if (config == null)
+            { 
                 GlobalConfig.Config.Load(config, "config.txt");
-
+            }
+            if( config == null)
+            {
+                config = new GlobalConfig.Config();
+            }
             return config;
         }
     }

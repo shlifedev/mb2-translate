@@ -47,7 +47,7 @@ namespace GlobalConfig
         {
             get
             {
-                return OutputPath + "MBKoreanFont.xml";
+                return OutputPath + "LatestTranslate.xml";
             }
         } 
         public string PatchSaveXmlPath = "PatchLang/LatestSheet.xml";
@@ -59,14 +59,17 @@ namespace GlobalConfig
         }
         public static void Load(Config target, string path)
         {
+        
             if (System.IO.File.Exists(path))
             {
+                Console.WriteLine("Custom Config used");
                 var json = System.IO.File.ReadAllText(path);
                 var obj = Newtonsoft.Json.JsonConvert.DeserializeObject<Config>(json);
                 target = obj; 
             }
             else
             {
+                Console.WriteLine("Default Config used");
                 target = new Config();
             }
             

@@ -43,8 +43,8 @@ namespace GoogleDrive
         static void DownloadFromSheet()
         {
             CredentialManager.CredentialDriveServiceByToken();
-            XMLSheetDownloader dl = new XMLSheetDownloader();
-            dl.DownloadFromSheet($"Downloaded/LatestTranslate.xml");
+            XMLSheetDownloader dl = new XMLSheetDownloader(); 
+            dl.DownloadFromSheet("Downloaded/LastTranslate.xml");
         }
         static void Download()
         {

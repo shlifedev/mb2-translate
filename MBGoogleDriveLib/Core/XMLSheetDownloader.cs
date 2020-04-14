@@ -14,13 +14,20 @@ public class XMLSheetDownloader
 {
     static List<TranslateData> data = new List<TranslateData>();  
     public void DownloadFromSheet(string xmlPath = null)
-    {
- 
-        string xmlSavePath = "";
-        if(xmlPath == null)
-            xmlSavePath = Setting.Config.XmlSavePath;
-        else 
+    {  
+      
+
+        string xmlSavePath = "";  
+        if(string.IsNullOrEmpty(xmlPath))
+            xmlSavePath = Setting.Config.XmlSavePath;  
+        if (string.IsNullOrEmpty(xmlSavePath))
             xmlSavePath = xmlPath; 
+        if(string.IsNullOrEmpty(xmlSavePath))
+        {
+            Console.WriteLine("xml path is null");
+            return;
+        }
+      
         System.IO.Directory.CreateDirectory(new FileInfo(xmlPath).Directory.FullName);
         System.IO.Directory.CreateDirectory(new FileInfo(Setting.Config.CSVSavePath).Directory.FullName); 
         // 생성할 XML 파일 경로와 이름, 인코딩 방식을 설정합니다. 
