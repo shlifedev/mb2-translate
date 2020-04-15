@@ -46,7 +46,7 @@ public class XMLSheetDownloader
         textWriter.WriteEndElement();
         textWriter.WriteEndElement();
         textWriter.WriteStartElement("strings"); 
-        var csv = DriveManager.DownloadCSV(Setting.Config.TRANSLATE_SHEET_ID); 
+        var csv = DriveManager.DownloadCSV("1oY5F5P-tMBj1-kryB5gR4gS4T5KrlqmDc-tHQBrQBDo"); 
         System.IO.File.WriteAllText(Setting.Config.CSVSavePath, csv);
         var splitnl = csv.Split('\n');
         using (var reader = new StreamReader(Setting.Config.CSVSavePath))
@@ -66,6 +66,11 @@ public class XMLSheetDownloader
         textWriter.WriteEndElement(); 
         textWriter.WriteEndElement(); 
         textWriter.WriteEndDocument(); 
-        textWriter.Close(); 
+        textWriter.Close();  
+
+
+        var str = System.IO.File.ReadAllText(xmlSavePath);
+        str = str.Replace("&#xA", "\n");
+        System.IO.File.WriteAllText(xmlSavePath, str);
     }
 }
