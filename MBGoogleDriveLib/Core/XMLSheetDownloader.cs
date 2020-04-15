@@ -58,7 +58,9 @@ public class XMLSheetDownloader
                 {
                     textWriter.WriteStartElement("string");
                     textWriter.WriteAttributeString("id", record.Id);
-                    textWriter.WriteAttributeString("text", record.Translate); 
+                    var translateText = record.Translate;
+                    translateText = translateText.Replace("\\n", "\n"); 
+                    textWriter.WriteAttributeString("text", translateText); 
                     textWriter.WriteEndElement();
                 }   
             } 
@@ -68,9 +70,6 @@ public class XMLSheetDownloader
         textWriter.WriteEndDocument(); 
         textWriter.Close();  
 
-
-        var str = System.IO.File.ReadAllText(xmlSavePath);
-        str = str.Replace("&#xA", "\n");
-        System.IO.File.WriteAllText(xmlSavePath, str);
+         
     }
 }
