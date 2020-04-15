@@ -1,14 +1,14 @@
-var ui = SpreadsheetApp.getUi();
-
+ 
 
 
 function WriteInspector() {
+  var ui = SpreadsheetApp.getUi();
   var b = SpreadsheetApp.getActive().getSheetName() == "번역시트";
   if (!b) return;
   var response = ui.prompt("제보 (" + filter + ")", "설명을 적어주세요\n ex) 번역기로 의심됩니다.\n ex) ~~랑~~하는 퀘스트인데 번역이 안되어있습니다.", ui.ButtonSet.YES_NO);
 }
 function Report(filter) {
-
+  var ui = SpreadsheetApp.getUi();
   var b = SpreadsheetApp.getActive().getSheetName() == "번역시트";
   if (!b) return;
   var response = ui.prompt("제보 (" + filter + ")", "설명을 적어주세요\n ex) 번역기로 의심됩니다.\n ex) ~~랑~~하는 퀘스트인데 번역이 안되어있습니다.", ui.ButtonSet.YES_NO);
@@ -37,7 +37,7 @@ function Report(filter) {
 
 
 function Inspect(filter) {
-
+  var ui = SpreadsheetApp.getUi();
   var b = SpreadsheetApp.getActive().getSheetName() == "번역시트";
   if (!b) return;
   var p = SpreadsheetApp.getActive().getCurrentCell();

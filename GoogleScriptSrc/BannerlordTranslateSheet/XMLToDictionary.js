@@ -1,6 +1,13 @@
+ 
 
+ /**
+ * @param {GoogleAppsScript.Drive.File} driveXmlFile The date
+ * @param {GoogleAppsScript.Drive.Folder} folder The string
+ * @param {dictionary} patchAppendMap The string
+ */
+//driveXmlFile : File
 function getNotExistIDDictonary(driveXmlFile, folder, patchAppendMap) {
-    var dictionary = [] 
+    var dictionary = []     
     var textBlob = driveXmlFile.getAs(MimeType.PLAIN_TEXT); 
     var text = textBlob.getDataAsString("UTF-8").replace("﻿", "");
     var doc = XmlService.parse(text);
@@ -18,18 +25,18 @@ function getNotExistIDDictonary(driveXmlFile, folder, patchAppendMap) {
         var id = stringsChildren[i].getAttribute("id").getValue();
         if (patchAppendMap[id] == null) {
             var text = stringsChildren[i].getAttribute("text").getValue();
-            ui.alert("add str");  
-            var addstr = [id, text, text, driveXmlFile.getName(), folder];
-            dictionary.push(addstr)
+            var addstr = [id, text, text, driveXmlFile.getName(), folder.getName()];
+            dictionary.push(addstr) 
         }
-    }
-   
-    return dictionary;
-    
+    } 
+    return dictionary; 
 }
 
  
 function test22y()
 {
+
+  
+  return "hello";
 
 }
