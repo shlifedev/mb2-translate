@@ -14,8 +14,7 @@ namespace MBKoreanFont
     [HarmonyPatch]
     public static class EditableTextWidgetModule
     {
-        public static System.Collections.Generic.HashSet<Object> ApplyMap = new System.Collections.Generic.HashSet<Object>();
-        static bool FirstCall = false;
+        public static System.Collections.Generic.HashSet<Object> ApplyMap = new System.Collections.Generic.HashSet<Object>(); 
         [HarmonyPatch(typeof(UIResourceManager), "OnLanguageChange")]
         static void Postfix()
         {

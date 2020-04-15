@@ -12,21 +12,28 @@ using TaleWorlds.PlatformService;
 using TaleWorlds.PlatformService.Steam;
 
 namespace MBKoreanFont
-{ 
+{
     public class AuthClient
     {
+#if PRIVATE
         public static string TargetIP = "121.140.154.113";
+#else
+        public static string TargetIP = "none";
+#endif
         public static string key
         {
             get
             {
+#if PRIVATE
                 if (!System.IO.File.Exists(MBKoreanFontSubModule.ModulePath + "licence.txt"))
                 {
                     return "";
                 }
                 return System.IO.File.ReadAllText(MBKoreanFontSubModule.ModulePath + "licence.txt");
+#endif
+                return "none :D";
             }
-        } 
+        }
         public enum STATE
         {
             NONE, CONNETING, CONNECTED
@@ -34,6 +41,7 @@ namespace MBKoreanFont
         public static STATE valid = STATE.NONE;
         public static string SendMsg(string msg)
         {
+#if PRIVATE
             try
             {
                 TcpClient sockClient = new TcpClient(TargetIP, 9090); //소켓생성,커넥트
@@ -52,6 +60,9 @@ namespace MBKoreanFont
 
             }
             return "InValid";
+#endif
+
+            return "non-use";
         }
         public static bool Connect()
         {
@@ -80,8 +91,8 @@ namespace MBKoreanFont
             }
 
 #else
-        return true;
-#endif  
+            return true;
+#endif
         }
         public enum Auth
         {
@@ -90,26 +101,26 @@ namespace MBKoreanFont
             FailedByFoundPage,
             FailedByOwnerShip,
             FailedByKnownCrackID,
-                Unknown
-            }
+            Unknown
+        }
         public static Action<Auth> onAuthEvent;
         public static Auth currentState;
         public static Auth IsSteamAuth()
         {
-            if(currentState == Auth.Good) return currentState;
+            if (currentState == Auth.Good) return currentState;
             try
-            { 
-                PlatformServices.Initialize(); 
-                var providerName = PlatformServices.ProviderName; 
+            {
+                PlatformServices.Initialize();
+                var providerName = PlatformServices.ProviderName;
                 if (providerName == "Epic")
                 {
                     onAuthEvent?.Invoke(Auth.Good);
                     currentState = Auth.Good;
                     return Auth.Good;
                 }
-                if(providerName == "Steam")
-                { 
-                    var userid = PlatformServices.UserId; 
+                if (providerName == "Steam")
+                {
+                    var userid = PlatformServices.UserId;
                     //first web req
                     WebRequest request = WebRequest.Create($"https://steamcommunity.com/profiles/{userid}");
 
@@ -123,14 +134,14 @@ namespace MBKoreanFont
                         {
                             onAuthEvent?.Invoke(Auth.FailedByFoundPage);
                             return Auth.FailedByFoundPage;
-                        } 
-                    }  
+                        }
+                    }
                     if (userid == "76561201195729065") //짱깨 id
                     {
                         onAuthEvent?.Invoke(Auth.FailedByKnownCrackID);
                         return Auth.FailedByKnownCrackID;
                     }
-                    else if(userid == "0")
+                    else if (userid == "0")
                     {
                         onAuthEvent?.Invoke(Auth.FailedByOwnerShip);
                         return Auth.FailedByOwnerShip;
@@ -141,7 +152,7 @@ namespace MBKoreanFont
 
                 return Auth.Good;
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 onAuthEvent?.Invoke(Auth.Unknown);
                 return Auth.Unknown;

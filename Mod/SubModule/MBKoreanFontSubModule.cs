@@ -61,8 +61,7 @@ namespace MBKoreanFont
         /// </summary>
         private float _gameUpTime = 0; 
         public static bool FontLoaded { get; set; }
-        public static Font font;
-
+        public static Font font; 
         protected override void OnBeforeInitialModuleScreenSetAsRoot()
         {
             base.OnBeforeInitialModuleScreenSetAsRoot();
