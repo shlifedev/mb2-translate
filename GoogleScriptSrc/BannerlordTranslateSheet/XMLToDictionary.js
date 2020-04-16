@@ -1,10 +1,11 @@
  
 
+
  /**
  * @param {GoogleAppsScript.Drive.File} driveXmlFile The date
  * @param {GoogleAppsScript.Drive.Folder} folder The string
  * @param {dictionary} patchAppendMap The string
- */
+ */ 
 //driveXmlFile : File
 function getNotExistIDDictonary(driveXmlFile, folder, patchAppendMap) {
     var dictionary = []     
@@ -30,13 +31,4 @@ function getNotExistIDDictonary(driveXmlFile, folder, patchAppendMap) {
         }
     } 
     return dictionary; 
-}
-
- 
-function test22y()
-{
-
-  
-  return "hello";
-
-}
+} 

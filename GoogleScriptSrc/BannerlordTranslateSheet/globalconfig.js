@@ -1,0 +1,1 @@
+var global_spreadsheet_main_id = "";

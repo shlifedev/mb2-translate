@@ -8,9 +8,14 @@ function showDownload(downloadLink) {
 }
 
 function showContactMsg() {
+
+  var ui = SpreadsheetApp.getUi();
   ui.alert("시트 툴 개발자 연락처 : shlifedev@gmail.com \n버그나 문제가 있을경우 연락처로 메일을 보내주세요. \n개발자가 회신하지 못할경우 다시 보내주세요.\n 공식 카페 https://cafe.naver.com/warband/")
+
+
 }
 
 function introduction() {
+  var ui = SpreadsheetApp.getUi();
   ui.alert("반갑습니다. 마운트 앤 블레이드 공식 번역 시트입니다. \n 언제나 수고해주시는 번역가님들에게 감사드립니다.")
 } 
