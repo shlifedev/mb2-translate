@@ -3,7 +3,12 @@
 /**
  * 
  * @param {GoogleAppsScript.Spreadsheet.Sheet} sheet 
- */
+ */ 
+
+function replaceAll(str, searchStr, replaceStr) {
+    return str.split(searchStr).join(replaceStr);
+ }
+
 function sheetToXML(sheet)
 {
     
@@ -12,13 +17,23 @@ function sheetToXML(sheet)
     //get id, org, trs, filename, modname
     var selectRange = sheet.getRange(2, 1, rowSize, 5);
     var values = selectRange.getValues();
-    var root = XmlService.createElement('base')
-    var strings = XmlService.createElement('strings');  
-    root.addContent(strings) 
+
+    
+    var root = XmlService.createElement('base'); 
+    // root.setAttribute('xmlns:xsi','b');
+    // root.setAttribute('xmlns:xsd','a');
+    // root.setAttribute('type','string');
+  
+
+
     var tags = XmlService.createElement('tags');  
     var tag = XmlService.createElement('tag').setAttribute('language', '한국어');
     tags.addContent(tag);
     root.addContent(tags);
+  
+    var strings = XmlService.createElement('strings');  
+    root.addContent(strings) 
+ 
 
     logSideMenu("Read and Write Sheet.", "init..");
     for(var i = 0; i < rowSize; i++)
@@ -26,6 +41,7 @@ function sheetToXML(sheet)
         var id = values[i][0];
         var org = values[i][1];
         var trs = values[i][2];
+            trs = replaceAll(trs, '\\n', '\n');
         var fName = values[i][3];
         var mName = values[i][4]; 
         var stringchild = XmlService.createElement('string')
@@ -34,7 +50,7 @@ function sheetToXML(sheet)
         strings.addContent(stringchild); 
         if(i % 1000 == 0)
         {
-            logSideMenu("current :" + (i / rowSize) * 100+ "% readed..");
+            logSideMenu("구글시트를 XML로 변환중 :" + Math.floor((i / rowSize) * 100)+ "% 진행됨..");
         }
     }
  
