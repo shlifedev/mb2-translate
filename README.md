@@ -1,5 +1,5 @@
 # KoreanMod Repo
-![](https://i.imgur.com/oVm6nDW.png)
+ 
  https://github.com/shlifedev/MBKoreanFont/tree/master/Mod
  
  마운트 앤 블레이드2 의 컴파일된 코드를 분석하여 Reflection을 통하여 Harmony 라이브러리를 이용해 m&b2의 게임 엔진의 
@@ -12,7 +12,7 @@
  
  
  
-
+![](https://i.imgur.com/oVm6nDW.png)
 ## Features
  * 한국어 입력/출력 지원 **(게임 모드/C#)**
  * 깔끔한 한국어 폰트 지원 **(게임 모드/C#)**
